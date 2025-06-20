@@ -10,8 +10,6 @@
        Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button  
-       Style="{StaticResource MaterialDesignRaisedButton}"  
-       Background="{DynamicResource PrimaryHueMidBrush}"  
        Foreground="White"  
        Command="{Binding RegisterCommand}" Margin="10,0,-10,0" >
             <mah:HamburgerMenu Content="HamburgerMenu"/>
