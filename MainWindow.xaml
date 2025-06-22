@@ -8,11 +8,27 @@
        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="PhotostudioProject.MainWindow"  
        mc:Ignorable="d"  
        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button  
-       Foreground="White"  
-       Command="{Binding RegisterCommand}" Margin="10,0,-10,0" >
-            <mah:HamburgerMenu Content="HamburgerMenu"/>
-        </Button>
+    <Grid Margin="20">
+        <ComboBox ItemsSource="{Binding Services}"
+                  DisplayMemberPath="name_of_service"
+                  SelectedItem="{Binding SelectedService, Mode=TwoWay}"
+                  Width="200"
+                  Height="30"
+                  Margin="0"/>
+        <TextBlock Text="Hover me"
+           FontSize="16"
+           Cursor="Hand" Panel.ZIndex="1">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="DodgerBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
     </Grid>
 </Window>

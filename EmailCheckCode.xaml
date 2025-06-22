@@ -1,0 +1,159 @@
+﻿<UserControl
+    x:Class="PhotostudioProject.EmailCheckCode"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PhotostudioProject"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="350"
+    mc:Ignorable="d">
+    <Grid Background="#B2FF99">
+        <StackPanel
+            Width="250"
+            Height="379"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+
+
+            <TextBlock
+                Margin="0,10"
+                HorizontalAlignment="Center"
+                FontFamily="Comic Sans MS"
+                FontSize="28"
+                FontStyle="Italic"
+                Text="Emerald Studio" />
+
+
+            <TextBlock
+                Height="36"
+                Margin="0,10"
+                HorizontalAlignment="Center"
+                FontSize="12"
+                FontWeight="SemiBold"
+                RenderTransformOrigin="0.487,0.113"
+                Text="Вам на пошту мав прийти код підтвердження" />
+
+            <TextBlock
+                Height="14"
+                Margin="10,0,0,0"
+                FontSize="12"
+                FontWeight="SemiBold"
+                RenderTransformOrigin="0.487,0.113"
+                Text="Введіть код" />
+
+            <Border
+                Margin="10"
+                Padding="2"
+                Background="White"
+                BorderBrush="Gray"
+                BorderThickness="0"
+                CornerRadius="5">
+                <TextBox
+                    x:Name="CheckCodeFromEmailBox"
+                    Height="31"
+                    Padding="5"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    FontSize="14" />
+            </Border>
+
+
+            <TextBlock
+                x:Name="NullErrorTextCheck"
+                Height="16"
+                HorizontalAlignment="Center"
+                FontSize="12"
+                FontWeight="SemiBold"
+                Foreground="REd"
+                RenderTransformOrigin="0.487,0.113"
+                Text="Поле не може бути пустим"
+                Visibility="Collapsed" />
+            <TextBlock
+                x:Name="ErrorTextBlockLoginCheck"
+                Height="16"
+                HorizontalAlignment="Center"
+                FontSize="12"
+                FontWeight="SemiBold"
+                Foreground="REd"
+                RenderTransformOrigin="0.487,0.113"
+                Text="Код неправильний"
+                Visibility="Collapsed" />
+            
+            <Border
+                Height="40"
+                Margin="10"
+                Padding="0"
+                Background="Transparent"
+                CornerRadius="5">
+                <Button
+                    x:Name="AcceptCodeEmail"
+                    Height="40"
+                    Background="#FF9999"
+                    BorderBrush="Transparent"
+                    Click="AcceptCodeEmail_Click"
+                    Content="Підтвердити"
+                    Cursor="Hand"
+                    FontSize="16"
+                    Foreground="Black">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#FF9999" />
+                            <Setter Property="Foreground" Value="Black" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border
+                                            x:Name="border"
+                                            Background="{TemplateBinding Background}"
+                                            BorderThickness="0"
+                                            CornerRadius="5">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Trigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <ColorAnimation
+                                                                Storyboard.TargetName="border"
+                                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                                To="#FF6666"
+                                                                Duration="0:0:0.2" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </Trigger.EnterActions>
+                                                <Trigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <ColorAnimation
+                                                                Storyboard.TargetName="border"
+                                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                                To="#FF9999"
+                                                                Duration="0:0:0.2" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </Trigger.ExitActions>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Border>
+
+            <TextBlock
+                x:Name="GetBackToRegistration"
+                Cursor="Hand"
+                FontSize="12"
+                Foreground="Blue"
+                MouseDown="GetBackToRegistration_MouseDown"
+                Text="Повернутись назад"
+                TextAlignment="Center"
+                TextDecorations="Underline" />
+        </StackPanel>
+    </Grid>
+
+</UserControl>
