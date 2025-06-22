@@ -33,7 +33,17 @@ namespace PhotostudioProject
 
         private void AcceptCodeEmail_Click(object sender, RoutedEventArgs e)
         {
-
+            if (string.IsNullOrWhiteSpace(CheckCodeFromEmailBox.Text))
+            {
+                NullErrorTextCheck.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                NullErrorTextCheck.Visibility = Visibility.Collapsed;
+                ErrorTextBlockLoginCheck.Visibility = Visibility.Collapsed;
+                var createPassword = new RegistrationCreatePassword();
+                ((StartupWindow_Login_)Application.Current.MainWindow).ClientContentLogin.Content = createPassword;
+            }
         }
     }
 }

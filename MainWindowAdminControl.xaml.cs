@@ -16,25 +16,28 @@ using System.Windows.Shapes;
 namespace PhotostudioProject
 {
     /// <summary>
-    /// Interaction logic for MainWindowWorkerControl.xaml
+    /// Interaction logic for MainWindowAdminControl.xaml
     /// </summary>
-    public partial class MainWindowWorkerControl : UserControl
+    public partial class MainWindowAdminControl : UserControl
     {
-        public MainWindowWorkerControl()
+        public MainWindowAdminControl()
         {
             InitializeComponent();
         }
 
-
-        private void ExitButtonWorker_Click(object sender, RoutedEventArgs e)
+        private void ViewProfileAdmin_Click(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this)?.Close();
 
         }
 
-        private void ViewProfileWorker_Click(object sender, RoutedEventArgs e)
+        private void CreateRaport_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ExitButtonAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            Window.GetWindow(this)?.Close();
         }
     }
 }

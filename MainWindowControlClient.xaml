@@ -16,14 +16,14 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <!--  Header  -->
+
                     <RowDefinition />
-                    <!--  Main content  -->
+
                     <RowDefinition Height="40" />
-                    <!--  Footer  -->
+
                 </Grid.RowDefinitions>
 
-                <!--  HEADER  -->
+
                 <DockPanel
                     Grid.Row="0"
                     Margin="0,0,0,10"
@@ -160,13 +160,73 @@
                                         Text="Якщо потрібна допомога — зверніться до нашої підтримки."
                                         TextWrapping="Wrap" />
 
-                                    <Button
-                                        x:Name="WriteToSupport"
-                                        Padding="5,2"
-                                        HorizontalAlignment="Right"
-                                        Click="WriteToSupport_Click"
-                                        Content="Написати в підтримку"
-                                        FontSize="12" />
+                                    <Border
+                                        Height="40"
+                                        Margin="10"
+                                        Padding="0"
+                                        Background="#FF9999"
+                                        BorderBrush="Gray"
+                                        BorderThickness="0"
+                                        CornerRadius="5"
+                                        RenderTransformOrigin="0.513,0.147">
+                                        <Button
+                                            x:Name="GetHelpButton"
+                                            Height="40"
+                                            Background="#FF9999"
+                                            BorderBrush="Transparent"
+                                            Click="GetHelpButton_Click"
+                                            Content="Написати в підтримку"
+                                            Cursor="Hand"
+                                            FontSize="16"
+                                            Foreground="Black">
+                                            <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <Setter Property="Background" Value="#FF9999" />
+                                                    <Setter Property="Foreground" Value="Black" />
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Border
+                                                                    x:Name="border"
+                                                                    Background="{TemplateBinding Background}"
+                                                                    BorderThickness="0"
+                                                                    CornerRadius="5">
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Trigger.EnterActions>
+                                                                            <BeginStoryboard>
+                                                                                <Storyboard>
+                                                                                    <ColorAnimation
+                                                                                        Storyboard.TargetName="border"
+                                                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                                                        To="#FF6666"
+                                                                                        Duration="0:0:0.2" />
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </Trigger.EnterActions>
+                                                                        <Trigger.ExitActions>
+                                                                            <BeginStoryboard>
+                                                                                <Storyboard>
+                                                                                    <ColorAnimation
+                                                                                        Storyboard.TargetName="border"
+                                                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                                                        To="#FF9999"
+                                                                                        Duration="0:0:0.2" />
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </Trigger.ExitActions>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </Border>
+
                                 </StackPanel>
                             </ContextMenu>
                         </Button.ContextMenu>

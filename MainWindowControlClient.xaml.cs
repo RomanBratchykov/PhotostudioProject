@@ -54,5 +54,10 @@ namespace PhotostudioProject
         {
 
         }
+
+        private void GetHelpButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
