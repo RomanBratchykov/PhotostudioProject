@@ -33,7 +33,20 @@ namespace PhotostudioProject
 
         private void LoginButtonStartUpWindowWorker_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(EmailTextBoxLoginWorker.Text) || string.IsNullOrWhiteSpace(PasswordBoxLoginWorker.Password))
+            {
+                NullErrorTextWorker.Visibility = Visibility.Visible;
+                return;
+            }
+            else
+            {
 
+                var window = new MainWindow("photographer");
+                window.Show();
+                ((StartupWindow_Login_)Application.Current.MainWindow).Close();
+                NullErrorTextWorker.Visibility = Visibility.Collapsed;
+                return;
+            }
         }
     }
 }

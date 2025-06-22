@@ -84,7 +84,26 @@
                     FontSize="14"
                     RenderTransformOrigin="0.499,-0.045" />
             </Border>
-
+            <TextBlock
+                x:Name="NullErrorTextWorker"
+                Height="16"
+                HorizontalAlignment="Center"
+                FontSize="12"
+                FontWeight="SemiBold"
+                Foreground="REd"
+                RenderTransformOrigin="0.487,0.113"
+                Text="Поля не можуть бути пусті"
+                Visibility="Collapsed" />
+            <TextBlock
+                x:Name="ErrorTextBlockLoginWorker"
+                Height="16"
+                HorizontalAlignment="Center"
+                FontSize="12"
+                FontWeight="SemiBold"
+                Foreground="REd"
+                RenderTransformOrigin="0.487,0.113"
+                Text="Пошта або пароль неправильні"
+                Visibility="Collapsed" />
             <Border
                 Height="40"
                 Margin="10"

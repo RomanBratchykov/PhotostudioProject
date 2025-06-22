@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace PhotostudioProject
 {
     /// <summary>
-    /// Interaction logic for MainWindowControlClient.xaml
+    /// Interaction logic for MainWindowWorkerControl.xaml
     /// </summary>
-    public partial class MainWindowControlClient : UserControl
+    public partial class MainWindowWorkerControl : UserControl
     {
-        public MainWindowControlClient()
+        public MainWindowWorkerControl()
         {
             InitializeComponent();
         }
@@ -30,27 +30,7 @@ namespace PhotostudioProject
 
         }
 
-        private void DeleteProfileClient_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void ExitButtonClient_Click(object sender, RoutedEventArgs e)
-        {
-            Window.GetWindow(this)?.Close();
-        }
-
-        private void HelpButtonClient_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void WriteToSupportButtonPH_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void WriteToSupport_Click(object sender, RoutedEventArgs e)
         {
 
         }

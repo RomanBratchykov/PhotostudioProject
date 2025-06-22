@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -47,6 +48,10 @@ namespace PhotostudioProject
             }
             else
             {
+                
+                var window = new MainWindow("client");
+                window.Show();
+                ((StartupWindow_Login_)Application.Current.MainWindow).Close();
                 NullErrorText.Visibility = Visibility.Collapsed;
                 return;
             }

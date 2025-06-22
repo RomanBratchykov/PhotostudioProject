@@ -33,7 +33,19 @@ namespace PhotostudioProject
 
         private void RegistrationButton1_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (string.IsNullOrWhiteSpace(EmailTextBoxReg.Text) || string.IsNullOrWhiteSpace(NameTextBoxReg.Text) || string.IsNullOrWhiteSpace(PhoneTextBoxReg.Text))
+            {
+                NullErrorTextReg.Visibility = Visibility.Visible;
+                return;
+            }
+            else
+            {
+                NullErrorTextReg.Visibility = Visibility.Collapsed;
+                ErrorTextBlockLoginReg.Visibility = Visibility.Collapsed;
+                var checkEmail = new EmailCheckCode();
+                ((StartupWindow_Login_)Application.Current.MainWindow).ClientContentLogin.Content = checkEmail;
+            }
+           
         }
     }
 }
