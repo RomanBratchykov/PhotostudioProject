@@ -23,8 +23,16 @@ namespace PhotostudioProject
         public MainWindowAdminControl()
         {
             InitializeComponent();
+            LoadPhotographers();
         }
-
+        private void LoadPhotographers()
+        {
+            using (var db = new PhotoStudioDbContext())
+            {
+                var photographers = db.Photographers.ToList();
+                WorkersInfo.ItemsSource = photographers;
+            }
+        }
         private void ViewProfileAdmin_Click(object sender, RoutedEventArgs e)
         {
 

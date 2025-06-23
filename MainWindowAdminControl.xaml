@@ -118,6 +118,7 @@
                         Text="Ваші працівники" />
 
                     <DataGrid
+                        x:Name="WorkersInfo"
                         Grid.Row="1"
                         Margin="10"
                         AutoGenerateColumns="False"
@@ -128,15 +129,15 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn
                                 Width="*"
-                                Binding="{Binding NamePhotographer}"
+                                Binding="{Binding NameOfWorker}"
                                 Header="ПІБ" />
                             <DataGridTextColumn
                                 Width="*"
-                                Binding="{Binding Photographer}"
+                                Binding="{Binding PhoneNumber}"
                                 Header="Номер телефону" />
                             <DataGridTextColumn
                                 Width="*"
-                                Binding="{Binding Location}"
+                                Binding="{Binding EmailOfWorker}"
                                 Header="Email" />
                         </DataGrid.Columns>
                     </DataGrid>

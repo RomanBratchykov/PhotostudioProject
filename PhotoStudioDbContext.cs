@@ -34,7 +34,7 @@ namespace PhotostudioProject
                 entity.Property(e => e.IdClient).HasColumnName("id_client");
                 entity.Property(e => e.NameOfClient).HasColumnName("name_of_client");
                 entity.Property(e => e.PhoneNumber).HasColumnName("phone_number");
-                entity.Property(e => e.Email).HasColumnName("email");
+                entity.Property(e => e.EmailOfClient).HasColumnName("email");
                 entity.Property(e => e.PasswordClient).HasColumnName("password_client");
             });
 

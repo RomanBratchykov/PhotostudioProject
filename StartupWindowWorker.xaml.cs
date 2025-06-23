@@ -33,25 +33,44 @@ namespace PhotostudioProject
 
         private void LoginButtonStartUpWindowWorker_Click(object sender, RoutedEventArgs e)
         {
-
             if (string.IsNullOrWhiteSpace(EmailTextBoxLoginWorker.Text) || string.IsNullOrWhiteSpace(PasswordBoxLoginWorker.Password))
             {
                 NullErrorTextWorker.Visibility = Visibility.Visible;
                 return;
             }
-            else
+            string? email = EmailTextBoxLoginWorker.Text.Trim();
+            string? password = PasswordBoxLoginWorker.Password.Trim();
+            using (var db = new PhotoStudioDbContext())
             {
-                var window = new MainWindow("photographer");
-                if (EmailTextBoxLoginWorker.Text == "admin" && PasswordBoxLoginWorker.Password == "admin")
+                var admin = db.Administrators
+                              .FirstOrDefault(a => a.EmailOfAdmin == email && a.PasswordAdmin == password);
+
+                if (admin != null)
                 {
-                    window = new MainWindow("admin");
+                    MessageBox.Show($"Вітаємо, адміне {admin.NameOfAdmin}!");
+                    var window = new MainWindow("admin", admin.IdAdmin);
+                    window.Show();
+                    ((StartupWindow_Login_)Application.Current.MainWindow).Close();
+                    Application.Current.MainWindow = window;
+                    NullErrorTextWorker.Visibility = Visibility.Collapsed;
+                    return;
                 }
-                
-                window.Show();
-                ((StartupWindow_Login_)Application.Current.MainWindow).Close();
-                Application.Current.MainWindow = window;
-                NullErrorTextWorker.Visibility = Visibility.Collapsed;
-                return;
+
+                var worker = db.Photographers
+                               .FirstOrDefault(p => p.EmailOfWorker == email && p.PasswordPhotographer == password);
+
+                if (worker != null)
+                {
+                    MessageBox.Show($"Вітаємо, {worker.NameOfWorker}!");
+                    var window = new MainWindow("photographer", worker.IdPhotographer);
+                    window.Show();
+                    ((StartupWindow_Login_)Application.Current.MainWindow).Close();
+                    Application.Current.MainWindow = window;
+                    NullErrorTextWorker.Visibility = Visibility.Collapsed;
+                    return;
+                }
+
+                ErrorTextBlockLoginWorker.Visibility = Visibility.Visible;
             }
         }
     }

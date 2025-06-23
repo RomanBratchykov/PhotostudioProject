@@ -46,14 +46,26 @@ namespace PhotostudioProject
                 NullErrorText.Visibility = Visibility.Visible;
                 return;
             }
-            else
+
+
+            string? email = EmailTextBoxLogin.Text.Trim();
+            string? password = PasswordBoxLogin.Password.Trim();
+            using (var db = new PhotoStudioDbContext())
             {
-                var window = new MainWindow("client");
-                
-                window.Show();
-                ((StartupWindow_Login_)Application.Current.MainWindow).Close();
-                Application.Current.MainWindow = window;
-                NullErrorText.Visibility = Visibility.Collapsed;
+                var client = db.Clients
+                               .FirstOrDefault(c => c.EmailOfClient == email && c.PasswordClient == password);
+                if (client != null)
+                {
+                    MessageBox.Show($"Вітаємо, клієнте {client.NameOfClient}!");
+                    var window = new MainWindow("client", client.IdClient);
+                    window.Show();
+                    ((StartupWindow_Login_)Application.Current.MainWindow).Close();
+                    Application.Current.MainWindow = window;
+                    ErrorTextBlockLogin.Visibility = Visibility.Collapsed;
+                    NullErrorText.Visibility = Visibility.Collapsed;
+                    return;
+                }
+                ErrorTextBlockLogin.Visibility = Visibility.Visible;
                 return;
             }
         }

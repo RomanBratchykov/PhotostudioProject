@@ -33,23 +33,23 @@ namespace PhotostudioProject
 
         private void AcceptPassword_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(PasswordBoxRegistration.Password) ||
-                string.IsNullOrWhiteSpace(PasswordBoxRegistrationCompare.Password))
-            {
-                NullErrorTextPasswords.Visibility = Visibility.Visible;
-            }
-            else if (PasswordBoxRegistration.Password != PasswordBoxRegistrationCompare.Password)
-            {
-                ErrorTextBlockPasswordsNotSame.Visibility = Visibility.Visible;
-            }
-            else
-            {
+            //    if (string.IsNullOrWhiteSpace(PasswordBoxRegistration.Password) ||
+            //        string.IsNullOrWhiteSpace(PasswordBoxRegistrationCompare.Password))
+            //    {
+            //        NullErrorTextPasswords.Visibility = Visibility.Visible;
+            //    }
+            //    else if (PasswordBoxRegistration.Password != PasswordBoxRegistrationCompare.Password)
+            //    {
+            //        ErrorTextBlockPasswordsNotSame.Visibility = Visibility.Visible;
+            //    }
+            //    else
+            //    {
 
-                var mainWindow = new MainWindow("client");
-                mainWindow.Show();
-                ((StartupWindow_Login_)Application.Current.MainWindow).Close();
-                Application.Current.MainWindow = mainWindow;
-            }
+            //        var mainWindow = new MainWindow("client");
+            //        mainWindow.Show();
+            //        ((StartupWindow_Login_)Application.Current.MainWindow).Close();
+            //        Application.Current.MainWindow = mainWindow;
+            //    }
         }
     }
 }
