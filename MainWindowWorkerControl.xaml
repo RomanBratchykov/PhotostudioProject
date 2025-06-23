@@ -42,18 +42,34 @@
                         Padding="10,5"
                         Background="Transparent"
                         BorderThickness="0"
+                        Click="PortfolioButton_Click"
                         Content="Редагувати портфоліо"
                         Cursor="Hand"
-                        DockPanel.Dock="Left" Click="PortfolioButton_Click"/>
+                        DockPanel.Dock="Left">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem
+                                    x:Name="ChangeMainPhoto"
+                                    Click="ChangeMainPhoto_Click"
+                                    Header="Вибрати основну фотографію" />
+                                <MenuItem
+                                    x:Name="ChoosePhotosPortfolio"
+                                    Click="ChoosePhotosPortfolio_Click"
+                                    Header="Вибрати портфоліо" />
+
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
                     <Button
                         x:Name="CompletedTasksButton"
                         Margin="10,0"
                         Padding="10,5"
                         Background="Transparent"
                         BorderThickness="0"
+                        Click="CompletedTasksButton_Click"
                         Content="Виконані замовлення"
                         Cursor="Hand"
-                        DockPanel.Dock="Left" Click="CompletedTasksButton_Click"/>
+                        DockPanel.Dock="Left" />
 
                     <Button
                         Width="30"

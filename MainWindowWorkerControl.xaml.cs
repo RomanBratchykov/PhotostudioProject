@@ -61,5 +61,15 @@ namespace PhotostudioProject
             ((MainWindow)Application.Current.MainWindow).MainWindowContent.Content = completedTasks;
             ((MainWindow)Application.Current.MainWindow).MainWindowContent.Visibility = Visibility.Visible;
         }
+
+        private void ChangeMainPhoto_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ChoosePhotosPortfolio_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
