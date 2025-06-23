@@ -46,9 +46,10 @@ namespace PhotostudioProject
                 {
                     window = new MainWindow("admin");
                 }
-
+                
                 window.Show();
                 ((StartupWindow_Login_)Application.Current.MainWindow).Close();
+                Application.Current.MainWindow = window;
                 NullErrorTextWorker.Visibility = Visibility.Collapsed;
                 return;
             }

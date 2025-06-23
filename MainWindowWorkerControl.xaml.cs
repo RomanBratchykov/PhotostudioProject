@@ -36,5 +36,30 @@ namespace PhotostudioProject
         {
 
         }
+
+        private void GetBackToLogin_Click(object sender, RoutedEventArgs e)
+        {
+            var loginWin = new StartupWindow_Login_();
+            loginWin.Show();
+            foreach (Window win in Application.Current.Windows)
+            {
+                if (win != loginWin)
+                    win.Close();
+            }
+
+            Application.Current.MainWindow = loginWin;
+        }
+
+        private void PortfolioButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void CompletedTasksButton_Click(object sender, RoutedEventArgs e)
+        {
+            var completedTasks = new CompletedTasksWorker();
+            ((MainWindow)Application.Current.MainWindow).MainWindowContent.Content = completedTasks;
+            ((MainWindow)Application.Current.MainWindow).MainWindowContent.Visibility = Visibility.Visible;
+        }
     }
 }

@@ -79,6 +79,10 @@
                                     x:Name="DeleteProfileClient"
                                     Click="DeleteProfileClient_Click"
                                     Header="Видалити аккаунт" />
+                                <MenuItem
+                                    x:Name="GetBackTologin"
+                                    Click="GetBackTologin_Click"
+                                    Header="Повернутись до реєстрації" />
                                 <Separator />
                                 <MenuItem
                                     x:Name="ExitButtonClient"

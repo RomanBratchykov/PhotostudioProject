@@ -59,5 +59,19 @@ namespace PhotostudioProject
         {
 
         }
+
+        private void GetBackTologin_Click(object sender, RoutedEventArgs e)
+        {
+            var loginWin = new StartupWindow_Login_();
+            loginWin.Show();
+
+            foreach (Window win in Application.Current.Windows)
+            {
+                if (win != loginWin)
+                    win.Close();
+            }
+
+            Application.Current.MainWindow = loginWin;
+        }
     }
 }

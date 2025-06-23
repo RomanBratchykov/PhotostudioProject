@@ -24,5 +24,12 @@ namespace PhotostudioProject
         {
             InitializeComponent();
         }
+
+        private void GetBackToPhotographer_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var photographerControl = new MainWindowWorkerControl();
+            ((MainWindow)Application.Current.MainWindow).MainWindowContent.Content = photographerControl;
+            ((MainWindow)Application.Current.MainWindow).MainWindowContent.Visibility = Visibility.Visible;
+        }
     }
 }

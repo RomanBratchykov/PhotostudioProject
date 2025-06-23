@@ -48,6 +48,7 @@ namespace PhotostudioProject
                 var mainWindow = new MainWindow("client");
                 mainWindow.Show();
                 ((StartupWindow_Login_)Application.Current.MainWindow).Close();
+                Application.Current.MainWindow = mainWindow;
             }
         }
     }

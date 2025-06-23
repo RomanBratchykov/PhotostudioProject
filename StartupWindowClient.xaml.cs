@@ -48,10 +48,11 @@ namespace PhotostudioProject
             }
             else
             {
-                
                 var window = new MainWindow("client");
+                
                 window.Show();
                 ((StartupWindow_Login_)Application.Current.MainWindow).Close();
+                Application.Current.MainWindow = window;
                 NullErrorText.Visibility = Visibility.Collapsed;
                 return;
             }

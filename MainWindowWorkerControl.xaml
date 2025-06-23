@@ -37,21 +37,23 @@
                         Text="Emerald Studio" />
 
                     <Button
+                        x:Name="PortfolioButton"
                         Margin="20,0"
                         Padding="10,5"
                         Background="Transparent"
                         BorderThickness="0"
                         Content="Редагувати портфоліо"
                         Cursor="Hand"
-                        DockPanel.Dock="Left" />
+                        DockPanel.Dock="Left" Click="PortfolioButton_Click"/>
                     <Button
+                        x:Name="CompletedTasksButton"
                         Margin="10,0"
                         Padding="10,5"
                         Background="Transparent"
                         BorderThickness="0"
                         Content="Виконані замовлення"
                         Cursor="Hand"
-                        DockPanel.Dock="Left" />
+                        DockPanel.Dock="Left" Click="CompletedTasksButton_Click"/>
 
                     <Button
                         Width="30"
@@ -75,6 +77,10 @@
                                     x:Name="ViewProfileWorker"
                                     Click="ViewProfileWorker_Click"
                                     Header="Переглянути профіль" />
+                                <MenuItem
+                                    x:Name="GetBackToLogin"
+                                    Click="GetBackToLogin_Click"
+                                    Header="Повернутись до логіну" />
                                 <Separator />
                                 <MenuItem
                                     x:Name="ExitButtonWorker"

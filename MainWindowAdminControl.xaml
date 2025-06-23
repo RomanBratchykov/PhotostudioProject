@@ -42,19 +42,19 @@
                         Padding="10,5"
                         Background="Transparent"
                         BorderThickness="0"
+                        Click="WorkerAddButton_Click"
                         Content="Додати працівника"
                         Cursor="Hand"
-                        DockPanel.Dock="Left"
-                        Click="WorkerAddButton_Click"/>
+                        DockPanel.Dock="Left" />
                     <Button
                         x:Name="WorkerDeleteButton"
                         Margin="10,0"
                         Padding="10,5"
                         Background="Transparent"
                         BorderThickness="0"
+                        Click="WorkerDeleteButton_Click"
                         Content="Видалити працівника"
                         Cursor="Hand"
-                        Click="WorkerDeleteButton_Click"
                         DockPanel.Dock="Left" />
                     <Button
                         Margin="10,0"
@@ -87,6 +87,10 @@
                                     x:Name="ViewProfileAdmin"
                                     Click="ViewProfileAdmin_Click"
                                     Header="Переглянути профіль" />
+                                <MenuItem
+                                    x:Name="GetBackToLogin"
+                                    Click="GetBackToLogin_Click"
+                                    Header="Повернутись до логіну" />
                                 <MenuItem
                                     x:Name="CreateRaport"
                                     Click="CreateRaport_Click"

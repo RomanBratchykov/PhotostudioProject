@@ -50,5 +50,19 @@ namespace PhotostudioProject
             var deleteWorkerWin = new DeleteWorker();
             deleteWorkerWin.ShowDialog();
         }
+
+        private void GetBackToLogin_Click(object sender, RoutedEventArgs e)
+        {
+            var loginWin = new StartupWindow_Login_();
+            loginWin.Show();
+       
+            foreach (Window win in Application.Current.Windows)
+            {
+                if (win != loginWin)
+                    win.Close();
+            }
+
+            Application.Current.MainWindow = loginWin;
+        }
     }
 }

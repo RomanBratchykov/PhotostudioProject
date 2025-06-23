@@ -59,11 +59,13 @@ namespace PhotostudioProject
             {
                 var workerControl = new MainWindowWorkerControl();
                 MainWindowContent.Content = workerControl;
+                this.Title = "Фотостудія Emerald(Фотограф)";
             }
             else if (currentUser == "admin")
             {
                 var adminControl = new MainWindowAdminControl();
                 MainWindowContent.Content = adminControl;
+                this.Title = "Фотостудія Emerald(Адмін)";
             }
             else
             {
