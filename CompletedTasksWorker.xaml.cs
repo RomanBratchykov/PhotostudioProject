@@ -16,25 +16,13 @@ using System.Windows.Shapes;
 namespace PhotostudioProject
 {
     /// <summary>
-    /// Interaction logic for MainWindowWorkerControl.xaml
+    /// Interaction logic for CompletedTasksWorker.xaml
     /// </summary>
-    public partial class MainWindowWorkerControl : UserControl
+    public partial class CompletedTasksWorker : UserControl
     {
-        public MainWindowWorkerControl()
+        public CompletedTasksWorker()
         {
             InitializeComponent();
-        }
-
-
-        private void ExitButtonWorker_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-
-        }
-
-        private void ViewProfileWorker_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

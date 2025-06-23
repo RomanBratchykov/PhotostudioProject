@@ -60,11 +60,11 @@ namespace PhotostudioProject
                 var workerControl = new MainWindowWorkerControl();
                 MainWindowContent.Content = workerControl;
             }
-            //else if (currentUser == "admin")
-            //{
-            //    var workerControl = new StartupWindowWorker();
-            //    ClientContentLogin.Content = workerControl;
-            //}
+            else if (currentUser == "admin")
+            {
+                var adminControl = new MainWindowAdminControl();
+                MainWindowContent.Content = adminControl;
+            }
             else
             {
                 throw new ArgumentException("Invalid user type");

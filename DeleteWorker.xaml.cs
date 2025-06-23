@@ -10,29 +10,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PhotostudioProject
 {
     /// <summary>
-    /// Interaction logic for MainWindowWorkerControl.xaml
+    /// Interaction logic for DeleteWorker.xaml
     /// </summary>
-    public partial class MainWindowWorkerControl : UserControl
+    public partial class DeleteWorker : Window
     {
-        public MainWindowWorkerControl()
+        public DeleteWorker()
         {
             InitializeComponent();
         }
-
-
-        private void ExitButtonWorker_Click(object sender, RoutedEventArgs e)
+        private void GetBackToAdminPageButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Application.Current.Shutdown();
-
+            this.Close();
         }
 
-        private void ViewProfileWorker_Click(object sender, RoutedEventArgs e)
+        private void DeleteWorkerButton_Click(object sender, RoutedEventArgs e)
         {
 
         }

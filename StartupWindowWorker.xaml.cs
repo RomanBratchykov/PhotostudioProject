@@ -33,6 +33,7 @@ namespace PhotostudioProject
 
         private void LoginButtonStartUpWindowWorker_Click(object sender, RoutedEventArgs e)
         {
+
             if (string.IsNullOrWhiteSpace(EmailTextBoxLoginWorker.Text) || string.IsNullOrWhiteSpace(PasswordBoxLoginWorker.Password))
             {
                 NullErrorTextWorker.Visibility = Visibility.Visible;
@@ -40,8 +41,12 @@ namespace PhotostudioProject
             }
             else
             {
-
                 var window = new MainWindow("photographer");
+                if (EmailTextBoxLoginWorker.Text == "admin" && PasswordBoxLoginWorker.Password == "admin")
+                {
+                    window = new MainWindow("admin");
+                }
+
                 window.Show();
                 ((StartupWindow_Login_)Application.Current.MainWindow).Close();
                 NullErrorTextWorker.Visibility = Visibility.Collapsed;

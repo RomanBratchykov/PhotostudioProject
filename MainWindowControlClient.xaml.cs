@@ -37,7 +37,7 @@ namespace PhotostudioProject
 
         private void ExitButtonClient_Click(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this)?.Close();
+            Application.Current.Shutdown();
         }
 
         private void HelpButtonClient_Click(object sender, RoutedEventArgs e)

@@ -37,19 +37,31 @@
                         Text="Emerald Studio" />
 
                     <Button
+                        x:Name="WorkerAddButton"
                         Margin="20,0"
                         Padding="10,5"
                         Background="Transparent"
                         BorderThickness="0"
                         Content="Додати працівника"
                         Cursor="Hand"
+                        DockPanel.Dock="Left"
+                        Click="WorkerAddButton_Click"/>
+                    <Button
+                        x:Name="WorkerDeleteButton"
+                        Margin="10,0"
+                        Padding="10,5"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Content="Видалити працівника"
+                        Cursor="Hand"
+                        Click="WorkerDeleteButton_Click"
                         DockPanel.Dock="Left" />
                     <Button
                         Margin="10,0"
                         Padding="10,5"
                         Background="Transparent"
                         BorderThickness="0"
-                        Content="Видалити працівника"
+                        Content="Переглянути просрочені закази"
                         Cursor="Hand"
                         DockPanel.Dock="Left" />
 
@@ -66,7 +78,7 @@
                         <Image
                             Width="30"
                             Height="30"
-                            Source="Assets/profile_icon.png"
+                            Source="Assets/profile_icon (2).png"
                             Stretch="Uniform" />
 
                         <Button.ContextMenu>

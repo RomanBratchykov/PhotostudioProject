@@ -37,7 +37,18 @@ namespace PhotostudioProject
 
         private void ExitButtonAdmin_Click(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this)?.Close();
+            Application.Current.Shutdown();
+        }
+
+        private void WorkerAddButton_Click(object sender, RoutedEventArgs e)
+        {
+            var addWorkerWin = new AddWorker();
+            addWorkerWin.ShowDialog();
+        }
+        private void WorkerDeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            var deleteWorkerWin = new DeleteWorker();
+            deleteWorkerWin.ShowDialog();
         }
     }
 }

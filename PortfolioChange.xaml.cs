@@ -10,31 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PhotostudioProject
 {
     /// <summary>
-    /// Interaction logic for MainWindowWorkerControl.xaml
+    /// Interaction logic for PortfolioChange.xaml
     /// </summary>
-    public partial class MainWindowWorkerControl : UserControl
+    public partial class PortfolioChange : Window
     {
-        public MainWindowWorkerControl()
+        public PortfolioChange()
         {
             InitializeComponent();
-        }
-
-
-        private void ExitButtonWorker_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-
-        }
-
-        private void ViewProfileWorker_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
