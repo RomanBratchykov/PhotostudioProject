@@ -8,9 +8,8 @@ namespace PhotostudioProject
 {
     class TypeOfService
     {
-        public int id_service { get; set; }
-        public string? name_of_service { get; set; }
-
-        public int? price { get; set; }
+        public int IdService { get; set; }
+        public string NameOfService { get; set; } = string.Empty;
+        public int Price { get; set; }
     }
 }

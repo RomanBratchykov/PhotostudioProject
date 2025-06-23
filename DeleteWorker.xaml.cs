@@ -22,6 +22,7 @@ namespace PhotostudioProject
         public DeleteWorker()
         {
             InitializeComponent();
+            LoadPhotographers();
         }
         private void GetBackToAdminPageButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -30,7 +31,42 @@ namespace PhotostudioProject
 
         private void DeleteWorkerButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (DeleteWorkerComboBox.SelectedValue is int selectedId)
+            {
+                DeletePhotographerById(selectedId);
+                LoadPhotographers(); 
+            }
+            else
+            {
+                MessageBox.Show("Оберіть фотографа для видалення.");
+            }
+        }
+        private void LoadPhotographers()
+        {
+            using (var db = new PhotoStudioDbContext())
+            {
+                var photographers = db.Photographers.ToList();
+                DeleteWorkerComboBox.ItemsSource = photographers;
+                DeleteWorkerComboBox.DisplayMemberPath = "NameOfWorker";
+                DeleteWorkerComboBox.SelectedValuePath = "IdPhotographer";
+            }
+        }
+        private void DeletePhotographerById(int photographerId)
+        {
+            using (var db = new PhotoStudioDbContext())
+            {
+                var photographer = db.Photographers.FirstOrDefault(p => p.IdPhotographer == photographerId);
+                if (photographer != null)
+                {
+                    db.Photographers.Remove(photographer);
+                    db.SaveChanges();
+                    MessageBox.Show("Фотограф успішно видалений.");
+                }
+                else
+                {
+                    MessageBox.Show("Фотограф не знайдений.");
+                }
+            }
         }
     }
 }
