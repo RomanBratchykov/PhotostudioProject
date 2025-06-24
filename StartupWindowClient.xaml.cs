@@ -57,7 +57,7 @@ namespace PhotostudioProject
                 if (client != null)
                 {
                     MessageBox.Show($"Вітаємо, клієнте {client.NameOfClient}!");
-                    var window = new MainWindow("client", client.IdClient);
+                    var window = new MainWindow("client", client.EmailOfClient);
                     window.Show();
                     ((StartupWindow_Login_)Application.Current.MainWindow).Close();
                     Application.Current.MainWindow = window;

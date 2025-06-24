@@ -48,7 +48,7 @@ namespace PhotostudioProject
                 if (admin != null)
                 {
                     MessageBox.Show($"Вітаємо, адміне {admin.NameOfAdmin}!");
-                    var window = new MainWindow("admin", admin.IdAdmin);
+                    var window = new MainWindow("admin", admin.EmailOfAdmin);
                     window.Show();
                     ((StartupWindow_Login_)Application.Current.MainWindow).Close();
                     Application.Current.MainWindow = window;
@@ -62,7 +62,7 @@ namespace PhotostudioProject
                 if (worker != null)
                 {
                     MessageBox.Show($"Вітаємо, {worker.NameOfWorker}!");
-                    var window = new MainWindow("photographer", worker.IdPhotographer);
+                    var window = new MainWindow("photographer", worker.EmailOfWorker);
                     window.Show();
                     ((StartupWindow_Login_)Application.Current.MainWindow).Close();
                     Application.Current.MainWindow = window;

@@ -21,32 +21,29 @@ namespace PhotostudioProject
 
     public partial class MainWindow : Window
         {
-        public string idClient { get; set; } = string.Empty;
-        public string idPhotographer { get; set; } = string.Empty;
-        public string idAdmin { get; set; } = string.Empty;
+        public string currentEmail { get; set; } = string.Empty;
 
         public string CurrentUser { get; set; } = string.Empty;
-        public MainWindow(string currentUser, int id)
+        public MainWindow(string currentUser, string email)
             {
             InitializeComponent();
             CurrentUser = currentUser;
+            currentEmail = email; 
             if (currentUser == "client")
             {
-                idClient = id.ToString();
+                
                 var clientControl = new MainWindowControlClient();
                 MainWindowContent.Content = clientControl;
 
             }
             else if (currentUser == "photographer")
             {
-                idPhotographer = id.ToString();
                 var workerControl = new MainWindowWorkerControl();
                 MainWindowContent.Content = workerControl;
                 this.Title = "Фотостудія Emerald(Фотограф)";
             }
             else if (currentUser == "admin")
             {
-                idAdmin = id.ToString();
                 var adminControl = new MainWindowAdminControl();
                 MainWindowContent.Content = adminControl;
                 this.Title = "Фотостудія Emerald(Адмін)";

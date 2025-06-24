@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net;
+using System.Net.Mail;
+
 
 namespace PhotostudioProject
 {
@@ -20,36 +23,50 @@ namespace PhotostudioProject
     /// </summary>
     public partial class RegistrationCreatePassword : UserControl
     {
-        public RegistrationCreatePassword()
+        private readonly RegistrationState _state;
+        public RegistrationCreatePassword(RegistrationState state)
         {
             InitializeComponent();
+            _state = state;
         }
 
         private void GetBackToCode_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var clientControl = new EmailCheckCode();
+            var clientControl = new EmailCheckCode(_state);
             ((StartupWindow_Login_)Application.Current.MainWindow).ClientContentLogin.Content = clientControl;
         }
 
         private void AcceptPassword_Click(object sender, RoutedEventArgs e)
         {
-            //    if (string.IsNullOrWhiteSpace(PasswordBoxRegistration.Password) ||
-            //        string.IsNullOrWhiteSpace(PasswordBoxRegistrationCompare.Password))
-            //    {
-            //        NullErrorTextPasswords.Visibility = Visibility.Visible;
-            //    }
-            //    else if (PasswordBoxRegistration.Password != PasswordBoxRegistrationCompare.Password)
-            //    {
-            //        ErrorTextBlockPasswordsNotSame.Visibility = Visibility.Visible;
-            //    }
-            //    else
-            //    {
-
-            //        var mainWindow = new MainWindow("client");
-            //        mainWindow.Show();
-            //        ((StartupWindow_Login_)Application.Current.MainWindow).Close();
-            //        Application.Current.MainWindow = mainWindow;
-            //    }
+            if (string.IsNullOrWhiteSpace(PasswordBoxRegistration.Password) ||
+                string.IsNullOrWhiteSpace(PasswordBoxRegistrationCompare.Password))
+            {
+                NullErrorTextPasswords.Visibility = Visibility.Visible;
+            }
+            else if (PasswordBoxRegistration.Password != PasswordBoxRegistrationCompare.Password)
+            {
+                ErrorTextBlockPasswordsNotSame.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                string password = PasswordBoxRegistration.Password.Trim();
+                var client = new Clients
+                {
+                    EmailOfClient = _state.Email,
+                    NameOfClient = _state.Name,
+                    PhoneNumberClient = _state.Phone,
+                    PasswordClient = password
+                };
+                using (var db = new PhotoStudioDbContext())
+                {
+                    db.Clients.Add(client);
+                    db.SaveChanges();
+                }
+                MessageBox.Show("Реєстрація успішна! Тепер ви можете увійти до системи.");
+                var clientControl = new StartupWindowClient();
+                ((StartupWindow_Login_)Application.Current.MainWindow).ClientContentLogin.Content = clientControl;
+                ((StartupWindow_Login_)Application.Current.MainWindow).ClientContentLogin.Visibility = Visibility.Visible;
+            }
         }
     }
 }

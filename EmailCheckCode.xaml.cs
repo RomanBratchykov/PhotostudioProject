@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net;
+using System.Net.Mail;
+using ZstdSharp.Unsafe;
 
 namespace PhotostudioProject
 {
@@ -20,9 +23,11 @@ namespace PhotostudioProject
     /// </summary>
     public partial class EmailCheckCode : UserControl
     {
-        public EmailCheckCode()
+        private readonly RegistrationState _state;
+        public EmailCheckCode(RegistrationState state)
         {
             InitializeComponent();
+            _state = state;
         }
 
         private void GetBackToRegistration_MouseDown(object sender, MouseButtonEventArgs e)
@@ -39,10 +44,15 @@ namespace PhotostudioProject
             }
             else
             {
-                NullErrorTextCheck.Visibility = Visibility.Collapsed;
-                ErrorTextBlockLoginCheck.Visibility = Visibility.Collapsed;
-                var createPassword = new RegistrationCreatePassword();
-                ((StartupWindow_Login_)Application.Current.MainWindow).ClientContentLogin.Content = createPassword;
+                if (CheckCodeFromEmailBox.Text == _state.Code)
+                {
+                    var passwordStep = new RegistrationCreatePassword(_state);
+                    ((StartupWindow_Login_)Application.Current.MainWindow).ClientContentLogin.Content = passwordStep;
+                }
+                else
+                {
+                    ErrorTextBlockLoginCheck.Visibility = Visibility.Visible;
+                }
             }
         }
     }
