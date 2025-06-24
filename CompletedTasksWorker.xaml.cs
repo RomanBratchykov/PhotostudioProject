@@ -35,9 +35,9 @@ namespace PhotostudioProject
                     return;
                 }
                 var completedTasks = db.PhotoSessions
-                    .Where(t => t.IdPhotographer == currentPhotographer.IdPhotographer && t.StatusOfSession == "Completed")
+                    .Where(t => t.IdPhotographer == currentPhotographer.IdPhotographer && t.StatusOfSession == "Готова")
                     .ToList();
-                CompletedSessionsWorker.ItemsSource = completedTasks;
+                CompletedSessionsWorker.ItemsSource = completedTasks.Where(r => r.StatusOfSession == "Готова");
             }
         }
 

@@ -64,7 +64,6 @@
                         FontSize="16"
                         FontWeight="Bold"
                         Text="Ваші замовлення" />
-
                     <DataGrid
                         x:Name="CompletedSessionsWorker"
                         Grid.Row="1"
@@ -78,20 +77,34 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn
                                 Width="*"
-                                Binding="{Binding OrderNumber}"
-                                Header="Номер" />
+                                Binding="{Binding NameOfClient}"
+                                Header="Клієнт"
+                                IsReadOnly="True" />
                             <DataGridTextColumn
                                 Width="*"
                                 Binding="{Binding Location}"
-                                Header="Локація" />
+                                Header="Локація"
+                                IsReadOnly="True" />
                             <DataGridTextColumn
                                 Width="*"
-                                Binding="{Binding Date}"
-                                Header="Дата" />
+                                Binding="{Binding DateOfSession}"
+                                Header="Дата"
+                                IsReadOnly="True" />
                             <DataGridTextColumn
                                 Width="*"
-                                Binding="{Binding Status}"
-                                Header="Готовність" />
+                                Binding="{Binding NameOfType}"
+                                Header="Тип послуги"
+                                IsReadOnly="True" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding Price}"
+                                Header="Ціна"
+                                IsReadOnly="True" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding StatusOfSession}"
+                                Header="Готовність"
+                                IsReadOnly="True" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

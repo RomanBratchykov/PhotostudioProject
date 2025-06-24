@@ -57,11 +57,13 @@
                         Cursor="Hand"
                         DockPanel.Dock="Left" />
                     <Button
+                        x:Name="ViewOrdersButton"
+                        Click="ViewOrdersButton_Click"
                         Margin="10,0"
                         Padding="10,5"
                         Background="Transparent"
                         BorderThickness="0"
-                        Content="Переглянути просрочені закази"
+                        Content="Переглянути всі закази"
                         Cursor="Hand"
                         DockPanel.Dock="Left" />
 

@@ -36,9 +36,16 @@ namespace PhotostudioProject
                     return;
                 }
             }
+            using (var db = new PhotoStudioDbContext())
+            {
+                var sessions = db.PhotoSessions
+                    .Where(p => p.IdClient == currentClient.IdClient && r.StatusOfSession != "Відмінена" && r.StatusOfSession != "Готова")
+                    .ToList();
+
+                ClientSessions.ItemsSource = sessions;
+            }
             CheckUpNameClient.Text = "Вітаємо, " + currentClient.NameOfClient + "!";
         }
-
         private void ViewProfileClient_Click(object sender, RoutedEventArgs e)
         {
 
@@ -123,10 +130,57 @@ namespace PhotostudioProject
             using (var db = new PhotoStudioDbContext())
             {
                 var sessions = db.PhotoSessions
-                    .Where(p => p.IdClient == currentClient.IdClient)
+                    .Where(p => p.IdClient == currentClient.IdClient && p.StatusOfSession != "Відмінена")
                     .ToList();
 
                 ClientSessions.ItemsSource = sessions;
+            }
+        }
+
+
+        private void LookPhotosMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private T FindAncestor<T>(DependencyObject current) where T : DependencyObject
+        {
+            while (current != null)
+            {
+                if (current is T)
+                    return (T)current;
+                current = VisualTreeHelper.GetParent(current);
+            }
+            return null;
+        }
+
+  
+
+        private void ClientSessions_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        {
+            if (ClientSessions.SelectedItem is PhotoSessions selectedSession)
+            {
+                var result = MessageBox.Show(
+                "Ви впевнені, що хочете скасувати замовлення?",
+                "Підтвердження скасування",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+                 );
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    selectedSession.StatusOfSession = "Відмінена";
+                    MessageBox.Show("Сесія скасована.");
+                    using (var db = new PhotoStudioDbContext())
+                    {
+                        db.PhotoSessions.Update(selectedSession);
+                        db.SaveChanges();
+                    }
+                    RefreshSessions();
+                }
+                else
+                {
+                    MessageBox.Show("Скасування відмінено.");
+                }
             }
         }
     }

@@ -108,7 +108,6 @@
                         FontSize="16"
                         FontWeight="Bold"
                         Text="Ваші замовлення" />
-
                     <DataGrid
                         x:Name="ClientSessions"
                         Grid.Row="1"
@@ -117,38 +116,40 @@
                         Background="#CCFFCC"
                         FontSize="14"
                         GridLinesVisibility="Horizontal"
-                        HeadersVisibility="Column">
+                        HeadersVisibility="Column" MouseDoubleClick="ClientSessions_MouseDoubleClick_1">
+                    
+                       
                         <DataGrid.Columns>
                             <DataGridTextColumn
-                                IsReadOnly="True"
                                 Width="*"
-                                Binding="{Binding IdPhotographer}"
-                                Header="Фотограф" />
+                                Binding="{Binding NameOfPhotographer}"
+                                Header="Фотограф"
+                                IsReadOnly="True" />
                             <DataGridTextColumn
-                                IsReadOnly="True"
                                 Width="*"
                                 Binding="{Binding Location}"
-                                Header="Локація" />
+                                Header="Локація"
+                                IsReadOnly="True" />
                             <DataGridTextColumn
-                                IsReadOnly="True"
                                 Width="*"
                                 Binding="{Binding DateOfSession}"
-                                Header="Дата" />
+                                Header="Дата"
+                                IsReadOnly="True" />
                             <DataGridTextColumn
-    IsReadOnly="True"
-    Width="*"
-    Binding="{Binding Price}"
-    Header="Ціна" />
+                                Width="*"
+                                Binding="{Binding Price}"
+                                Header="Ціна"
+                                IsReadOnly="True" />
                             <DataGridTextColumn
-IsReadOnly="True"
-Width="*"
-Binding="{Binding TypeOfService}"
-Header="Тип послуги" />
+                                Width="*"
+                                Binding="{Binding NameOfType}"
+                                Header="Тип послуги"
+                                IsReadOnly="True" />
                             <DataGridTextColumn
-                                IsReadOnly="True"
                                 Width="*"
                                 Binding="{Binding StatusOfSession}"
-                                Header="Готовність" />
+                                Header="Готовність"
+                                IsReadOnly="True" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -193,7 +194,7 @@ Header="Тип послуги" />
                                             Height="40"
                                             Background="#FF9999"
                                             BorderBrush="Transparent"
-                                            Click="GetHelpButton_Click" 
+                                            Click="GetHelpButton_Click"
                                             Content="Написати в підтримку"
                                             Cursor="Hand"
                                             FontSize="16"

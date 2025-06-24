@@ -28,21 +28,17 @@ namespace PhotostudioProject
             InitializeComponent();
             using (var db = new PhotoStudioDbContext())
             {
-                
+
                 currentPhotographer = db.Photographers.FirstOrDefault(p => p.EmailOfPhotographer == email);
                 if (currentPhotographer == null)
                 {
                     MessageBox.Show("Фотограф не знайдений.");
                     return;
                 }
-                var photographersSession = db.PhotoSessions.ToList().Where(r => r.IdPhotographer == currentPhotographer.IdPhotographer);
-                if (photographersSession == null || !photographersSession.Any())
-                {
-                    MessageBox.Show("Немає сеансів для відображення.");
-                    return;
-                }
+                var photographersSession = db.PhotoSessions.ToList().Where(r => r.IdPhotographer == currentPhotographer.IdPhotographer && r.StatusOfSession != "Відмінена" && r.StatusOfSession != "Готова");
                 OrdersFowWorker.ItemsSource = photographersSession;
             }
+            RefreshSessions();
             CheckUpName.Text = "Вітаємо, " + currentPhotographer.NameOfPhotographer + "!";
         }
 
@@ -73,7 +69,7 @@ namespace PhotostudioProject
 
         private void PortfolioButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void CompletedTasksButton_Click(object sender, RoutedEventArgs e)
@@ -91,6 +87,48 @@ namespace PhotostudioProject
         private void ChoosePhotosPortfolio_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void OrdersFowWorker_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (OrdersFowWorker.SelectedItem is PhotoSessions selectedSession)
+            {
+                var result = MessageBox.Show(
+                "Cкинути фото?",
+                "Підтвердження скасування",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+                 );
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    selectedSession.StatusOfSession = "Готова";
+                    MessageBox.Show("Фото відправлені.");
+                    using (var db = new PhotoStudioDbContext())
+                    {
+                        db.PhotoSessions.Update(selectedSession);
+                        db.SaveChanges();
+                    }
+                    RefreshSessions();
+                }
+                else
+                {
+                    MessageBox.Show("Скасування відмінено.");
+                }
+            }
+        }
+        public void RefreshSessions()
+        {
+            using (var db = new PhotoStudioDbContext())
+            {
+                if (currentPhotographer != null)
+                {
+                    var photographersSession = db.PhotoSessions
+                        .Where(r => r.IdPhotographer == currentPhotographer.IdPhotographer && r.StatusOfSession != "Відмінена")
+                        .ToList();
+                    OrdersFowWorker.ItemsSource = photographersSession;
+                }
+            }
         }
     }
 }

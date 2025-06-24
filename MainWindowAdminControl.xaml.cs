@@ -110,5 +110,12 @@ namespace PhotostudioProject
                 WorkersInfo.ItemsSource = photographers;
             }
         }
+
+        private void ViewOrdersButton_Click(object sender, RoutedEventArgs e)
+        {
+            var ordersWindow = new ViewAllOrdersAdmin(email);
+            ((MainWindow)Application.Current.MainWindow).MainWindowContent.Content = ordersWindow;
+            ((MainWindow)Application.Current.MainWindow).MainWindowContent.Visibility = Visibility.Visible;
+        }
     }
 }

@@ -27,7 +27,9 @@ namespace PhotostudioProject
             using (var db = new PhotoStudioDbContext())
             {
                 currentClient = db.Clients.FirstOrDefault(c => c.EmailOfClient == email);
-                var locations = db.Locations.ToList();
+                var locations = db.Locations.ToList(); 
+                allPhotographers = db.Photographers.ToList();
+                ChooseLocationComboBox.SelectionChanged += ChoosePhotographerComboBox_SelectionChanged;
                 if (!locations.Any())
                 {
                     MessageBox.Show("Немає локацій для відображення.");
@@ -37,7 +39,7 @@ namespace PhotostudioProject
                 ChooseLocationComboBox.DisplayMemberPath = "Address";
                 ChooseLocationComboBox.SelectedValuePath = "IdOfLocation";
 
-                allPhotographers = db.Photographers.ToList();
+                
                 if (!allPhotographers.Any())
                 {
                     MessageBox.Show("Немає фотографів для відображення.");
@@ -53,7 +55,7 @@ namespace PhotostudioProject
                 ChooseTypeOfSession.ItemsSource = services;
             }
 
-            ChooseLocationComboBox.SelectionChanged += ChoosePhotographerComboBox_SelectionChanged;
+           
         }
 
         private void CreateNewSessionButton_Click(object sender, RoutedEventArgs e)
@@ -82,6 +84,9 @@ namespace PhotostudioProject
                 return;
             }
             var idOfClient = currentClient.IdClient;
+            var nameOfClient = currentClient.NameOfClient;
+            var nameOfPhotographer = selectedPhotographer.NameOfPhotographer;
+            var nameOfService = selectedService.NameOfService;
             var price = selectedService.Price;
             if (CosmetologistCheckBox.IsChecked == true)
             {
@@ -95,6 +100,7 @@ namespace PhotostudioProject
             {
                 var newSession = new PhotoSessions
                 {
+                    NameOfClient = nameOfClient,
                     Location = selectedLocation.Address,
                     IdClient = idOfClient,
                     Price = price,
@@ -102,6 +108,8 @@ namespace PhotostudioProject
                     IdPhotographer = selectedPhotographer.IdPhotographer,
                     TypeOfService = selectedService.IdService,
                     DateOfSession = SessionDatePicker.SelectedDate ?? DateTime.Now,
+                    NameOfPhotographer = nameOfPhotographer,
+                    NameOfType = nameOfService
                 };
                 db.PhotoSessions.Add(newSession);
                 db.SaveChanges();
