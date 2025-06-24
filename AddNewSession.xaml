@@ -1,12 +1,214 @@
-﻿<Window x:Class="PhotostudioProject.AddNewSession"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PhotostudioProject"
-        mc:Ignorable="d"
-        Title="AddNewSession" Height="450" Width="800">
-    <Grid>
-        
+﻿<Window
+    x:Class="PhotostudioProject.AddNewSession"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PhotostudioProject"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Редактор замовлення"
+    Width="500"
+    Height="550"
+    mc:Ignorable="d">
+    <Grid Margin="10">
+        <Border
+            Margin="0,0,0,10"
+            Padding="20"
+            Background="#B2FF99"
+            CornerRadius="10">
+            <StackPanel Height="464" VerticalAlignment="Center">
+
+                <!--  Header  -->
+                <DockPanel Margin="0,0,0,20" LastChildFill="False">
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontFamily="Comic Sans MS"
+                        FontSize="24"
+                        FontStyle="Italic"
+                        Text="Emerald Studio" />
+                    <TextBlock
+                        x:Name="BackToClient"
+                        VerticalAlignment="Center"
+                        Cursor="Hand"
+                        DockPanel.Dock="Right"
+                        FontSize="14"
+                        Foreground="Blue"
+                        MouseDown="BackToClient_MouseDown"
+                        Text="Повернутись назад"
+                        TextDecorations="Underline" />
+                </DockPanel>
+
+
+                <TextBlock
+                    Margin="0,0,0,20"
+                    HorizontalAlignment="Center"
+                    FontSize="20"
+                    Text="Редактор замовлення" />
+
+                <TextBlock
+                    Height="14"
+                    Margin="10,0,0,0"
+                    FontSize="12"
+                    FontWeight="SemiBold"
+                    RenderTransformOrigin="0.487,0.113"
+                    Text="Виберіть локацію" />
+
+                <Border
+                    Width="206"
+                    Margin="10"
+                    Padding="2"
+                    HorizontalAlignment="Left"
+                    Background="White"
+                    BorderBrush="Gray"
+                    BorderThickness="0"
+                    CornerRadius="5">
+                    <ComboBox
+                        x:Name="ChooseLocationComboBox"
+                        Width="200"
+                        Height="30"
+                        DisplayMemberPath="Adress"
+                        SelectedIndex="0"
+                        SelectedValuePath="IdOfLocation" />
+                </Border>
+                <TextBlock
+                    Height="14"
+                    Margin="10,0,0,0"
+                    FontSize="12"
+                    FontWeight="SemiBold"
+                    RenderTransformOrigin="0.487,0.113"
+                    Text="Виберіть фотографа" />
+
+                <Border
+                    Width="202"
+                    Margin="10"
+                    Padding="2"
+                    HorizontalAlignment="Left"
+                    Background="White"
+                    BorderBrush="Gray"
+                    BorderThickness="0"
+                    CornerRadius="5">
+                    <ComboBox
+                        x:Name="ChoosePhotographerComboBox"
+                        SelectionChanged="ChoosePhotographerComboBox_SelectionChanged"
+                        Width="200"
+                        Height="30"
+                        DisplayMemberPath="NameOfPhotographer"
+                        SelectedIndex="0"
+                        SelectedValuePath="IdPhotographer" />
+                </Border>
+                <TextBlock
+                    Height="14"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    FontSize="12"
+                    FontWeight="SemiBold"
+                    RenderTransformOrigin="0.487,0.113"
+                    Text="Виберіть послугу" />
+
+                <Border
+                    Width="206"
+                    Margin="10"
+                    Padding="2"
+                    HorizontalAlignment="Left"
+                    Background="White"
+                    BorderBrush="Gray"
+                    BorderThickness="0"
+                    CornerRadius="5">
+                    <ComboBox
+                        x:Name="ChooseTypeOfSession"
+                        Width="200"
+                        Height="30"
+                        DisplayMemberPath="NameOfService"
+                        SelectedIndex="0"
+                        SelectedValuePath="IdService" />
+                </Border>
+                <DatePicker
+                    x:Name="SessionDatePicker"
+                    Height="40"
+                    Margin="0,0,0,20"
+                    FontSize="14" />
+
+                <StackPanel Margin="0,0,0,20" Orientation="Horizontal">
+                    <CheckBox
+                        x:Name="CosmetologistCheckBox"
+                        Margin="0,0,20,0"
+                        Content="Візажист"
+                        FontSize="14" />
+                    <CheckBox
+                        x:Name="StylistCheckBox"
+                        Content="Стиліст"
+                        FontSize="14" />
+                </StackPanel>
+
+
+                <Border
+                    Height="40"
+                    Margin="10"
+                    Padding="0"
+                    Background="#FF9999"
+                    BorderBrush="Gray"
+                    BorderThickness="0"
+                    CornerRadius="5"
+                    RenderTransformOrigin="0.513,0.147">
+                    <Button
+                        x:Name="CreateNewSessionButton"
+                        Height="40"
+                        Background="#FF9999"
+                        BorderBrush="Transparent"
+                        Click="CreateNewSessionButton_Click"
+                        Content="Продовжити"
+                        Cursor="Hand"
+                        FontSize="16"
+                        Foreground="Black">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#FF9999" />
+                                <Setter Property="Foreground" Value="Black" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border
+                                                x:Name="border"
+                                                Background="{TemplateBinding Background}"
+                                                BorderThickness="0"
+                                                CornerRadius="5">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Trigger.EnterActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <ColorAnimation
+                                                                    Storyboard.TargetName="border"
+                                                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                                    To="#FF6666"
+                                                                    Duration="0:0:0.2" />
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </Trigger.EnterActions>
+                                                    <Trigger.ExitActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <ColorAnimation
+                                                                    Storyboard.TargetName="border"
+                                                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                                    To="#FF9999"
+                                                                    Duration="0:0:0.2" />
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </Trigger.ExitActions>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Border>
+
+
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>

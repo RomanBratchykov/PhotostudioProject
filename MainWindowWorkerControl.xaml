@@ -90,7 +90,6 @@
                         <Button.ContextMenu>
                             <ContextMenu>
                                 <MenuItem
-                                    
                                     x:Name="ViewProfileWorker"
                                     Click="ViewProfileWorker_Click"
                                     Header="Переглянути профіль" />
@@ -126,6 +125,7 @@
                         Text="Ваші замовлення" />
 
                     <DataGrid
+                        x:Name="OrdersFowWorker"
                         Grid.Row="1"
                         Grid.ColumnSpan="2"
                         Margin="10,10,10,10"
@@ -136,25 +136,30 @@
                         HeadersVisibility="Column">
                         <DataGrid.Columns>
                             <DataGridTextColumn
-                                IsReadOnly="True"
-                                Width="*"
-                                Binding="{Binding OrderNumber}"
-                                Header="Номер" />
-                            <DataGridTextColumn
-                                IsReadOnly="True"
                                 Width="*"
                                 Binding="{Binding Location}"
-                                Header="Локація" />
+                                Header="Локація"
+                                IsReadOnly="True" />
                             <DataGridTextColumn
-                                IsReadOnly="True"
                                 Width="*"
-                                Binding="{Binding Date}"
-                                Header="Дата" />
+                                Binding="{Binding DateOfSession}"
+                                Header="Дата"
+                                IsReadOnly="True" />
                             <DataGridTextColumn
-                                IsReadOnly="True"
                                 Width="*"
-                                Binding="{Binding Status}"
-                                Header="Готовність" />
+                                Binding="{Binding TypeOfService}"
+                                Header="Тип послуги"
+                                IsReadOnly="True" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding Price}"
+                                Header="Ціна"
+                                IsReadOnly="True" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding StatusOfSession}"
+                                Header="Готовність"
+                                IsReadOnly="True" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

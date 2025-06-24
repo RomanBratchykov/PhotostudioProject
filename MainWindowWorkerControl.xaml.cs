@@ -28,12 +28,20 @@ namespace PhotostudioProject
             InitializeComponent();
             using (var db = new PhotoStudioDbContext())
             {
+                
                 currentPhotographer = db.Photographers.FirstOrDefault(p => p.EmailOfPhotographer == email);
                 if (currentPhotographer == null)
                 {
                     MessageBox.Show("Фотограф не знайдений.");
                     return;
                 }
+                var photographersSession = db.PhotoSessions.ToList().Where(r => r.IdPhotographer == currentPhotographer.IdPhotographer);
+                if (photographersSession == null || !photographersSession.Any())
+                {
+                    MessageBox.Show("Немає сеансів для відображення.");
+                    return;
+                }
+                OrdersFowWorker.ItemsSource = photographersSession;
             }
             CheckUpName.Text = "Вітаємо, " + currentPhotographer.NameOfPhotographer + "!";
         }

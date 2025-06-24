@@ -97,7 +97,16 @@ namespace PhotostudioProject
 
         private void CreateOrderButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var newSession = new AddNewSession(email);
+            bool? result = newSession.ShowDialog();
+            if (result == true)
+            {
+                RefreshSessions();
+            }
+            else
+            {
+                MessageBox.Show("Помилка при створенні нового сеансу.");
+            }
         }
 
         private void HelpButtonClient_Click(object sender, RoutedEventArgs e)
@@ -108,6 +117,17 @@ namespace PhotostudioProject
         private void GetHelpButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+        public void RefreshSessions()
+        {
+            using (var db = new PhotoStudioDbContext())
+            {
+                var sessions = db.PhotoSessions
+                    .Where(p => p.IdClient == currentClient.IdClient)
+                    .ToList();
+
+                ClientSessions.ItemsSource = sessions;
+            }
         }
     }
 }

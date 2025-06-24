@@ -110,6 +110,7 @@
                         Text="Ваші замовлення" />
 
                     <DataGrid
+                        x:Name="ClientSessions"
                         Grid.Row="1"
                         Margin="10"
                         AutoGenerateColumns="False"
@@ -121,12 +122,7 @@
                             <DataGridTextColumn
                                 IsReadOnly="True"
                                 Width="*"
-                                Binding="{Binding OrderNumber}"
-                                Header="Номер" />
-                            <DataGridTextColumn
-                                IsReadOnly="True"
-                                Width="*"
-                                Binding="{Binding Photographer}"
+                                Binding="{Binding IdPhotographer}"
                                 Header="Фотограф" />
                             <DataGridTextColumn
                                 IsReadOnly="True"
@@ -136,12 +132,22 @@
                             <DataGridTextColumn
                                 IsReadOnly="True"
                                 Width="*"
-                                Binding="{Binding Date}"
+                                Binding="{Binding DateOfSession}"
                                 Header="Дата" />
+                            <DataGridTextColumn
+    IsReadOnly="True"
+    Width="*"
+    Binding="{Binding Price}"
+    Header="Ціна" />
+                            <DataGridTextColumn
+IsReadOnly="True"
+Width="*"
+Binding="{Binding TypeOfService}"
+Header="Тип послуги" />
                             <DataGridTextColumn
                                 IsReadOnly="True"
                                 Width="*"
-                                Binding="{Binding Status}"
+                                Binding="{Binding StatusOfSession}"
                                 Header="Готовність" />
                         </DataGrid.Columns>
                     </DataGrid>

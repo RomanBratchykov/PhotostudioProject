@@ -106,6 +106,7 @@ namespace PhotostudioProject
                 entity.Property(e => e.IdClient).HasColumnName("id_client");
                 entity.Property(e => e.IdPhotographer).HasColumnName("id_photographer");
                 entity.Property(e => e.DateOfSession).HasColumnName("date_of_session");
+                entity.Property(e => e.Location).HasColumnName("location");
                 entity.Property(e => e.Price).HasColumnName("price");
                 entity.Property(e => e.StatusOfSession).HasColumnName("status_of_session");
                 entity.Property(e => e.TypeOfService).HasColumnName("type_of_service");
