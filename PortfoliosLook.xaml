@@ -81,7 +81,7 @@
 
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button x:Name="ImageButton" Click="ImageButton_Click"
+                                    <Button  Cursor="Hand" x:Name="ImageButton" Click="ImageButton_Click"
                     Padding="0"
                     BorderThickness="1"
                     BorderBrush="DarkGray"

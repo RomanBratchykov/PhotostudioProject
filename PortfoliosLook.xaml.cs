@@ -11,7 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+
+using System.IO;
 
 namespace PhotostudioProject
 {
@@ -36,6 +37,14 @@ namespace PhotostudioProject
                     return;
                 }
             }
+            string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Photos");
+
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+            var images = Directory.GetFiles(folderPath, "*.jpg");
+            PhotoGallery.ItemsSource = images;
         }
 
         private void GetBackToClient_MouseDown(object sender, MouseButtonEventArgs e)

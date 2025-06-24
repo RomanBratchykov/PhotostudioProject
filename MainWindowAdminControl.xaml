@@ -128,14 +128,17 @@
                         HeadersVisibility="Column">
                         <DataGrid.Columns>
                             <DataGridTextColumn
+                                IsReadOnly="True"
                                 Width="*"
                                 Binding="{Binding NameOfPhotographer}"
                                 Header="ПІБ" />
                             <DataGridTextColumn
+                                IsReadOnly="True"
                                 Width="*"
                                 Binding="{Binding PhoneNumberPhotographer}"
                                 Header="Номер телефону" />
                             <DataGridTextColumn
+                                IsReadOnly="True"
                                 Width="*"
                                 Binding="{Binding EmailOfPhotographer}"
                                 Header="Email" />

@@ -119,22 +119,27 @@
                         HeadersVisibility="Column">
                         <DataGrid.Columns>
                             <DataGridTextColumn
+                                IsReadOnly="True"
                                 Width="*"
                                 Binding="{Binding OrderNumber}"
                                 Header="Номер" />
                             <DataGridTextColumn
+                                IsReadOnly="True"
                                 Width="*"
                                 Binding="{Binding Photographer}"
                                 Header="Фотограф" />
                             <DataGridTextColumn
+                                IsReadOnly="True"
                                 Width="*"
                                 Binding="{Binding Location}"
                                 Header="Локація" />
                             <DataGridTextColumn
+                                IsReadOnly="True"
                                 Width="*"
                                 Binding="{Binding Date}"
                                 Header="Дата" />
                             <DataGridTextColumn
+                                IsReadOnly="True"
                                 Width="*"
                                 Binding="{Binding Status}"
                                 Header="Готовність" />
