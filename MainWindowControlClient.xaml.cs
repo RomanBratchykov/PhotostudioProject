@@ -39,7 +39,7 @@ namespace PhotostudioProject
             using (var db = new PhotoStudioDbContext())
             {
                 var sessions = db.PhotoSessions
-                    .Where(p => p.IdClient == currentClient.IdClient && r.StatusOfSession != "Відмінена" && r.StatusOfSession != "Готова")
+                    .Where(p => p.IdClient == currentClient.IdClient && p.StatusOfSession != "Відмінена" && p.StatusOfSession != "Готова")
                     .ToList();
 
                 ClientSessions.ItemsSource = sessions;
