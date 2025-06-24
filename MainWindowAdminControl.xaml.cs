@@ -70,12 +70,20 @@ namespace PhotostudioProject
         private void WorkerAddButton_Click(object sender, RoutedEventArgs e)
         {
             var addWorkerWin = new AddWorker(email);
-            addWorkerWin.ShowDialog();
+            bool? result = addWorkerWin.ShowDialog();
+            if (result == true)
+            {
+                RefreshPhotographers();
+            }
         }
         private void WorkerDeleteButton_Click(object sender, RoutedEventArgs e)
         {
             var deleteWorkerWin = new DeleteWorker(email);
-            deleteWorkerWin.ShowDialog();
+            bool? result = deleteWorkerWin.ShowDialog();
+            if (result == true)
+            {
+                RefreshPhotographers();
+            }
         }
 
         private void GetBackToLogin_Click(object sender, RoutedEventArgs e)
@@ -90,6 +98,17 @@ namespace PhotostudioProject
             }
 
             Application.Current.MainWindow = loginWin;
+        }
+       public void RefreshPhotographers()
+        {
+            using (var db = new PhotoStudioDbContext())
+            {
+                var photographers = db.Photographers
+                    .Where(p => p.IdOfLocation == currentAdmin.IdOfLocation)
+                    .ToList();
+
+                WorkersInfo.ItemsSource = photographers;
+            }
         }
     }
 }

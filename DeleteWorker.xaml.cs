@@ -79,6 +79,8 @@ namespace PhotostudioProject
                     MessageBox.Show("Фотограф не знайдений.");
                 }
             }
+            this.DialogResult = true;
+            this.Close();
         }
     }
 }

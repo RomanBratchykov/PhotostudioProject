@@ -63,6 +63,8 @@ namespace PhotostudioProject
                 db.SaveChanges();
             }
             MessageBox.Show("Фотограф успішно доданий.");
+            this.DialogResult = true;
+            this.Close();
         }
 
         private void ReturnToAdminPageAddWor_MouseDown(object sender, MouseButtonEventArgs e)
