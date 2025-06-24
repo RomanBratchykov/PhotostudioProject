@@ -23,11 +23,9 @@ namespace PhotostudioProject
         {
         public string currentEmail { get; set; } = string.Empty;
 
-        public string CurrentUser { get; set; } = string.Empty;
         public MainWindow(string currentUser, string email)
             {
             InitializeComponent();
-            CurrentUser = currentUser;
             currentEmail = email; 
             if (currentUser == "client")
             {

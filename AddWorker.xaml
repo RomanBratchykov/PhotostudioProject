@@ -45,6 +45,7 @@
                 Text="Введіть ПІБ" />
 
             <Border
+                Height="25"
                 Margin="10"
                 Padding="2"
                 Background="White"
@@ -53,8 +54,8 @@
                 CornerRadius="5">
                 <TextBox
                     x:Name="NameTextBoxAddWor"
-                    Height="23"
-                    Padding="5"
+                    Height="25"
+                    Padding="2"
                     Background="Transparent"
                     BorderThickness="0"
                     FontSize="14" />
@@ -68,16 +69,17 @@
                 Text="Введіть email" />
 
             <Border
+                Height="25"
                 Margin="10"
-                Padding="2"
+                Padding="0"
                 Background="White"
                 BorderBrush="Gray"
                 BorderThickness="0"
                 CornerRadius="5">
                 <TextBox
                     x:Name="EmailTextBoxAddWor"
-                    Height="23"
-                    Padding="5"
+                    Height="25"
+                    Padding="0"
                     Background="Transparent"
                     BorderThickness="0"
                     FontSize="14" />
@@ -91,44 +93,45 @@
                 Text="Введіть номер телефону" />
 
             <Border
+                Height="25"
                 Margin="10"
-                Padding="2"
+                Padding="0"
                 Background="White"
                 BorderBrush="Gray"
                 BorderThickness="0"
                 CornerRadius="5">
                 <TextBox
                     x:Name="PhoneTextBoxAddWor"
-                    Height="23"
-                    Padding="5"
+                    Height="25"
+                    Padding="0"
                     Background="Transparent"
                     BorderThickness="0"
                     FontSize="14" />
             </Border>
             <TextBlock
-    Height="16"
-    Margin="10,0,0,0"
-    FontSize="12"
-    FontWeight="SemiBold"
-    RenderTransformOrigin="0.487,0.113"
-    Text="Введіть пароль" />
+                Height="16"
+                Margin="10,0,0,0"
+                FontSize="12"
+                FontWeight="SemiBold"
+                RenderTransformOrigin="0.487,0.113"
+                Text="Введіть пароль" />
             <Border
-     Height="30"
-     Margin="10"
-     Padding="2"
-     Background="White"
-     BorderBrush="Gray"
-     BorderThickness="0"
-     CornerRadius="5">
+                Height="25"
+                Margin="10"
+                Padding="2"
+                Background="White"
+                BorderBrush="Gray"
+                BorderThickness="0"
+                CornerRadius="5">
                 <PasswordBox
-         x:Name="PasswordBoxLoginAddWor"
-                    Height="30"
-         Margin="0,-2,0,8"
-         Padding="10"
-         BorderBrush="LightGray"
-         BorderThickness="0"
-         FontSize="14"
-         RenderTransformOrigin="0.499,-0.045" />
+                    x:Name="PasswordBoxLoginAddWor"
+                    Height="25"
+                    Margin="0,-2,0,8"
+                    Padding="0"
+                    BorderBrush="LightGray"
+                    BorderThickness="0"
+                    FontSize="14"
+                    RenderTransformOrigin="0.499,-0.045" />
             </Border>
             <TextBlock
                 x:Name="NullErrorTextAddWor"

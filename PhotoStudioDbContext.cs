@@ -64,11 +64,11 @@ namespace PhotostudioProject
                 entity.ToTable("photographer");
                 entity.HasKey(e => e.IdPhotographer);
                 entity.Property(e => e.IdPhotographer).HasColumnName("id_photographer");
-                entity.Property(e => e.NameOfWorker).HasColumnName("name_of_worker");
+                entity.Property(e => e.NameOfPhotographer).HasColumnName("name_of_worker");
                 entity.Property(e => e.IdOfLocation).HasColumnName("id_of_location");
                 entity.Property(e => e.IdOfAdmin).HasColumnName("id_of_admin");
-                entity.Property(e => e.EmailOfWorker).HasColumnName("email_of_worker");
-                entity.Property(e => e.PhoneNumber).HasColumnName("phone_number");
+                entity.Property(e => e.EmailOfPhotographer).HasColumnName("email_of_worker");
+                entity.Property(e => e.PhoneNumberPhotographer).HasColumnName("phone_number");
                 entity.Property(e => e.PasswordPhotographer).HasColumnName("password_photographer");
             });
 

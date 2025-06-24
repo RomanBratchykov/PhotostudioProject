@@ -238,5 +238,9 @@
                 </Grid>
             </Grid>
         </Border>
+        <TextBlock
+            x:Name="CheckUpNameClient"
+            VerticalAlignment="Bottom"
+            Text="" />
     </Grid>
 </UserControl>

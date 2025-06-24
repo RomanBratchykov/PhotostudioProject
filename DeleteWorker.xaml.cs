@@ -59,7 +59,7 @@ namespace PhotostudioProject
             {
                 var photographers = db.Photographers.ToList().Where(r => r.IdOfLocation == currentAdmin.IdOfLocation);
                 DeleteWorkerComboBox.ItemsSource = photographers;
-                DeleteWorkerComboBox.DisplayMemberPath = "NameOfWorker";
+                DeleteWorkerComboBox.DisplayMemberPath = "NameOfPhotographer";
                 DeleteWorkerComboBox.SelectedValuePath = "IdPhotographer";
             }
         }

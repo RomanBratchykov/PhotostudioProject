@@ -28,7 +28,7 @@ namespace PhotostudioProject
             InitializeComponent();
             using (var db = new PhotoStudioDbContext())
             {
-                currentPhotographer = db.Photographers.FirstOrDefault(p => p.EmailOfWorker == email);
+                currentPhotographer = db.Photographers.FirstOrDefault(p => p.EmailOfPhotographer == email);
                 if (currentPhotographer == null)
                 {
                     MessageBox.Show("Фотограф не знайдений.");

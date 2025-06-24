@@ -57,12 +57,12 @@ namespace PhotostudioProject
                 }
 
                 var worker = db.Photographers
-                               .FirstOrDefault(p => p.EmailOfWorker == email && p.PasswordPhotographer == password);
+                               .FirstOrDefault(p => p.EmailOfPhotographer == email && p.PasswordPhotographer == password);
 
                 if (worker != null)
                 {
-                    MessageBox.Show($"Вітаємо, {worker.NameOfWorker}!");
-                    var window = new MainWindow("photographer", worker.EmailOfWorker);
+                    MessageBox.Show($"Вітаємо, {worker.NameOfPhotographer}!");
+                    var window = new MainWindow("photographer", worker.EmailOfPhotographer);
                     window.Show();
                     ((StartupWindow_Login_)Application.Current.MainWindow).Close();
                     Application.Current.MainWindow = window;

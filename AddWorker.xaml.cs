@@ -19,30 +19,55 @@ namespace PhotostudioProject
     /// </summary>
     public partial class AddWorker : Window
     {
-        public AddWorker()
+        private Administrators? currentAdmin { get; set; }
+        public AddWorker(string email)
         {
             InitializeComponent();
+            using (var db = new PhotoStudioDbContext())
+            {
+                currentAdmin = db.Administrators.FirstOrDefault(a => a.EmailOfAdmin == email);
+                if (currentAdmin == null)
+                {
+                    MessageBox.Show("Адміністратор не знайдений.");
+                    return;
+                }
+            }
         }
 
-        private void GetBackToAdminPageButton_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void DeleteWorkerButton_Click(object sender, RoutedEventArgs e)
-        {
+        private void AddWorkerButton_Click(object sender, RoutedEventArgs e)
+        {   
+            string name = NameTextBoxAddWor.Text;
+            string email = EmailTextBoxAddWor.Text;
+            string phoneNumber = PhoneTextBoxAddWor.Text;
+            string password = PasswordBoxLoginAddWor.Password;
+            int idOfLocation = currentAdmin.IdOfLocation;
+            int idOfAdmin = currentAdmin.IdAdmin;
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(phoneNumber) || string.IsNullOrWhiteSpace(password))
+            {
+                NullErrorTextAddWor.Visibility = Visibility.Visible;
+                return;
+            }
             
+            var newPhotographer = new Photographer
+            {
+                NameOfPhotographer = name,
+                EmailOfPhotographer = email,
+                PhoneNumberPhotographer = phoneNumber,
+                PasswordPhotographer = password,
+                IdOfLocation = idOfLocation,
+                IdOfAdmin = idOfAdmin
+            };
+            using (var db = new PhotoStudioDbContext())
+            {
+                db.Photographers.Add(newPhotographer);
+                db.SaveChanges();
+            }
+            MessageBox.Show("Фотограф успішно доданий.");
         }
-
 
         private void ReturnToAdminPageAddWor_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.Close();
-        }
-
-        private void AddWorkerButton_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

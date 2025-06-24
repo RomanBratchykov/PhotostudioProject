@@ -37,12 +37,18 @@ namespace PhotostudioProject
                 }
             }
             LoadPhotographers(currentAdmin);
+            CheckUpNameAdmin.Text = currentAdmin.NameOfAdmin;
         }
         private void LoadPhotographers(Administrators currentAdmin)
         {
             using (var db = new PhotoStudioDbContext())
             {
                 var photographers = db.Photographers.ToList();
+                if (photographers == null || !photographers.Any())
+                {
+                    MessageBox.Show("Немає фотографів для відображення.");
+                    return;
+                }
                 WorkersInfo.ItemsSource = photographers.Where(r => r.IdOfLocation == currentAdmin.IdOfLocation);
             }
         }
@@ -63,7 +69,7 @@ namespace PhotostudioProject
 
         private void WorkerAddButton_Click(object sender, RoutedEventArgs e)
         {
-            var addWorkerWin = new AddWorker();
+            var addWorkerWin = new AddWorker(email);
             addWorkerWin.ShowDialog();
         }
         private void WorkerDeleteButton_Click(object sender, RoutedEventArgs e)

@@ -129,15 +129,15 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn
                                 Width="*"
-                                Binding="{Binding NameOfWorker}"
+                                Binding="{Binding NameOfPhotographer}"
                                 Header="ПІБ" />
                             <DataGridTextColumn
                                 Width="*"
-                                Binding="{Binding PhoneNumber}"
+                                Binding="{Binding PhoneNumberPhotographer}"
                                 Header="Номер телефону" />
                             <DataGridTextColumn
                                 Width="*"
-                                Binding="{Binding EmailOfWorker}"
+                                Binding="{Binding EmailOfPhotographer}"
                                 Header="Email" />
                         </DataGrid.Columns>
                     </DataGrid>
@@ -147,5 +147,9 @@
 
             </Grid>
         </Border>
+        <TextBlock
+    x:Name="CheckUpNameAdmin"
+    VerticalAlignment="Bottom"
+    Text="" />
     </Grid>
 </UserControl>

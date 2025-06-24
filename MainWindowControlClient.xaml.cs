@@ -33,6 +33,7 @@ namespace PhotostudioProject
                     return;
                 }
             }
+            CheckUpNameClient.Text = "Вітаємо, " + currentClient.NameOfClient + "!";
         }
 
         private void ViewProfileClient_Click(object sender, RoutedEventArgs e)

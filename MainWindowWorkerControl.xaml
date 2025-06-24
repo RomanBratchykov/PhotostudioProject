@@ -158,5 +158,9 @@
 
             </Grid>
         </Border>
+        <TextBlock
+            x:Name="CheckUpName"
+            VerticalAlignment="Bottom"
+            Text="" />
     </Grid>
 </UserControl>
