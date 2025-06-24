@@ -37,18 +37,22 @@
                         Text="Emerald Studio" />
 
                     <Button
+                        x:Name="CreateOrderButton"
                         Margin="20,0"
                         Padding="10,5"
                         Background="Transparent"
                         BorderThickness="0"
+                        Click="CreateOrderButton_Click"
                         Content="Створити замовлення"
                         Cursor="Hand"
                         DockPanel.Dock="Left" />
                     <Button
+                        x:Name="LookPortfolioButton"
                         Margin="10,0"
                         Padding="10,5"
                         Background="Transparent"
                         BorderThickness="0"
+                        Click="LookPortfolioButton_Click"
                         Content="Перегляд фотографів"
                         Cursor="Hand"
                         DockPanel.Dock="Left" />
@@ -178,7 +182,7 @@
                                             Height="40"
                                             Background="#FF9999"
                                             BorderBrush="Transparent"
-                                            Click="GetHelpButton_Click"
+                                            Click="GetHelpButton_Click" 
                                             Content="Написати в підтримку"
                                             Cursor="Hand"
                                             FontSize="16"

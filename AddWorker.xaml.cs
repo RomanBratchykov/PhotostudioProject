@@ -64,6 +64,9 @@ namespace PhotostudioProject
             }
             MessageBox.Show("Фотограф успішно доданий.");
             this.DialogResult = true;
+            string emailStart = newPhotographer.EmailOfPhotographer.Length >= 5
+            ? newPhotographer.EmailOfPhotographer.Substring(0, 5)
+            : newPhotographer.EmailOfPhotographer;
             this.Close();
         }
 

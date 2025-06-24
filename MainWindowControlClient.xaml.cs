@@ -21,9 +21,12 @@ namespace PhotostudioProject
     public partial class MainWindowControlClient : UserControl
     {
         private Clients? currentClient { get; set; }
+
+        private string email { get; set; } = string.Empty;
         public MainWindowControlClient(string email)
         {
             InitializeComponent();
+            this.email = email;
             using (var db = new PhotoStudioDbContext())
             {
                 currentClient = db.Clients.FirstOrDefault(c => c.EmailOfClient == email);
@@ -43,32 +46,32 @@ namespace PhotostudioProject
 
         private void DeleteProfileClient_Click(object sender, RoutedEventArgs e)
         {
-
+            using(var db = new PhotoStudioDbContext())
+            {
+                if (currentClient != null)
+                {
+                    db.Clients.Remove(currentClient);
+                    db.SaveChanges();
+                    MessageBox.Show("Ваш профіль успішно видалено.");
+                    var loginWin = new StartupWindow_Login_();
+                    loginWin.Show();
+                    foreach (Window win in Application.Current.Windows)
+                    {
+                        if (win != loginWin)
+                            win.Close();
+                    }
+                    Application.Current.MainWindow = loginWin;
+                }
+                else
+                {
+                    MessageBox.Show("Помилка: Клієнт не знайдений.");
+                }
+            }
         }
 
         private void ExitButtonClient_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
-        }
-
-        private void HelpButtonClient_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void WriteToSupportButtonPH_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void WriteToSupport_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void GetHelpButton_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void GetBackTologin_Click(object sender, RoutedEventArgs e)
@@ -83,6 +86,28 @@ namespace PhotostudioProject
             }
 
             Application.Current.MainWindow = loginWin;
+        }
+
+        private void LookPortfolioButton_Click(object sender, RoutedEventArgs e)
+        {
+            var portfoliosLook = new PortfoliosLook(email);
+            ((MainWindow)Application.Current.MainWindow).MainWindowContent.Content = portfoliosLook;
+            ((MainWindow)Application.Current.MainWindow).MainWindowContent.Visibility = Visibility.Visible;
+        }
+
+        private void CreateOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void HelpButtonClient_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GetHelpButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
