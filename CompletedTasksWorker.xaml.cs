@@ -20,14 +20,30 @@ namespace PhotostudioProject
     /// </summary>
     public partial class CompletedTasksWorker : UserControl
     {
-        public CompletedTasksWorker()
+        private Photographer? currentPhotographer { get; set; }
+        public string email { get; set; }
+        public CompletedTasksWorker(string email)
         {
+            this.email = email;
             InitializeComponent();
+            using (var db = new PhotoStudioDbContext())
+            {
+                currentPhotographer = db.Photographers.FirstOrDefault(p => p.EmailOfWorker == email);
+                if (currentPhotographer == null)
+                {
+                    MessageBox.Show("Фотограф не знайдений.");
+                    return;
+                }
+                var completedTasks = db.PhotoSessions
+                    .Where(t => t.IdPhotographer == currentPhotographer.IdPhotographer && t.StatusOfSession == "Completed")
+                    .ToList();
+                CompletedSessionsWorker.ItemsSource = completedTasks;
+            }
         }
 
         private void GetBackToPhotographer_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var photographerControl = new MainWindowWorkerControl();
+            var photographerControl = new MainWindowWorkerControl(email);
             ((MainWindow)Application.Current.MainWindow).MainWindowContent.Content = photographerControl;
             ((MainWindow)Application.Current.MainWindow).MainWindowContent.Visibility = Visibility.Visible;
         }

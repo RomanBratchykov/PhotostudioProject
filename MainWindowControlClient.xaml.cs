@@ -20,9 +20,19 @@ namespace PhotostudioProject
     /// </summary>
     public partial class MainWindowControlClient : UserControl
     {
-        public MainWindowControlClient()
+        private Clients? currentClient { get; set; }
+        public MainWindowControlClient(string email)
         {
             InitializeComponent();
+            using (var db = new PhotoStudioDbContext())
+            {
+                currentClient = db.Clients.FirstOrDefault(c => c.EmailOfClient == email);
+                if (currentClient == null)
+                {
+                    MessageBox.Show("Клієнт не знайдений.");
+                    return;
+                }
+            }
         }
 
         private void ViewProfileClient_Click(object sender, RoutedEventArgs e)

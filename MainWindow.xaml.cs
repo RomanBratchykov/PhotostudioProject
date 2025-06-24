@@ -32,19 +32,19 @@ namespace PhotostudioProject
             if (currentUser == "client")
             {
                 
-                var clientControl = new MainWindowControlClient();
+                var clientControl = new MainWindowControlClient(email);
                 MainWindowContent.Content = clientControl;
 
             }
             else if (currentUser == "photographer")
             {
-                var workerControl = new MainWindowWorkerControl();
+                var workerControl = new MainWindowWorkerControl(email);
                 MainWindowContent.Content = workerControl;
                 this.Title = "Фотостудія Emerald(Фотограф)";
             }
             else if (currentUser == "admin")
             {
-                var adminControl = new MainWindowAdminControl();
+                var adminControl = new MainWindowAdminControl(email);
                 MainWindowContent.Content = adminControl;
                 this.Title = "Фотостудія Emerald(Адмін)";
             }

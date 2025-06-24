@@ -19,10 +19,22 @@ namespace PhotostudioProject
     /// </summary>
     public partial class DeleteWorker : Window
     {
-        public DeleteWorker()
+        private Administrators? currentAdmin { get; set; }
+        private string email { get; set; } 
+        public DeleteWorker(string email)
         {
             InitializeComponent();
-            LoadPhotographers();
+            this.email = email;
+            using (var db = new PhotoStudioDbContext())
+            {
+                currentAdmin = db.Administrators.FirstOrDefault(a => a.EmailOfAdmin == email);
+                if (currentAdmin == null)
+                {
+                    MessageBox.Show("Адміністратор не знайдений.");
+                    return;
+                }
+            }
+            LoadPhotographers(currentAdmin);
         }
         private void GetBackToAdminPageButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -34,18 +46,18 @@ namespace PhotostudioProject
             if (DeleteWorkerComboBox.SelectedValue is int selectedId)
             {
                 DeletePhotographerById(selectedId);
-                LoadPhotographers(); 
+                LoadPhotographers(currentAdmin); 
             }
             else
             {
                 MessageBox.Show("Оберіть фотографа для видалення.");
             }
         }
-        private void LoadPhotographers()
+        private void LoadPhotographers( Administrators currentAdmin)
         {
             using (var db = new PhotoStudioDbContext())
             {
-                var photographers = db.Photographers.ToList();
+                var photographers = db.Photographers.ToList().Where(r => r.IdOfLocation == currentAdmin.IdOfLocation);
                 DeleteWorkerComboBox.ItemsSource = photographers;
                 DeleteWorkerComboBox.DisplayMemberPath = "NameOfWorker";
                 DeleteWorkerComboBox.SelectedValuePath = "IdPhotographer";

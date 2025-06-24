@@ -20,17 +20,30 @@ namespace PhotostudioProject
     /// </summary>
     public partial class MainWindowAdminControl : UserControl
     {
-        public MainWindowAdminControl()
+        private Administrators? currentAdmin { get; set; }
+        private string email { get; set; } = string.Empty;
+
+        public MainWindowAdminControl(string email)
         {
             InitializeComponent();
-            LoadPhotographers();
+            this.email = email;
+            using (var db = new PhotoStudioDbContext())
+            {
+                currentAdmin = db.Administrators.FirstOrDefault(a => a.EmailOfAdmin == email);
+                if (currentAdmin == null)
+                {
+                    MessageBox.Show("Адміністратор не знайдений.");
+                    return;
+                }
+            }
+            LoadPhotographers(currentAdmin);
         }
-        private void LoadPhotographers()
+        private void LoadPhotographers(Administrators currentAdmin)
         {
             using (var db = new PhotoStudioDbContext())
             {
                 var photographers = db.Photographers.ToList();
-                WorkersInfo.ItemsSource = photographers;
+                WorkersInfo.ItemsSource = photographers.Where(r => r.IdOfLocation == currentAdmin.IdOfLocation);
             }
         }
         private void ViewProfileAdmin_Click(object sender, RoutedEventArgs e)
@@ -55,7 +68,7 @@ namespace PhotostudioProject
         }
         private void WorkerDeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            var deleteWorkerWin = new DeleteWorker();
+            var deleteWorkerWin = new DeleteWorker(email);
             deleteWorkerWin.ShowDialog();
         }
 
