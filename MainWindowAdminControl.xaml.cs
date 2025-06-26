@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PhotostudioProject
 {
@@ -23,9 +23,20 @@ namespace PhotostudioProject
         private Administrators? currentAdmin { get; set; }
         private string email { get; set; } = string.Empty;
 
+        private MediaPlayer _player = new MediaPlayer();
+
+        private async void PlaySoundForTwoSeconds()
+        {
+            _player.Open(new Uri(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Sounds/soft-piano.mp3")));
+            _player.Play();
+
+            await Task.Delay(3000); 
+            _player.Stop();         
+        }
         public MainWindowAdminControl(string email)
         {
             InitializeComponent();
+            PlaySoundForTwoSeconds();
             this.email = email;
             using (var db = new PhotoStudioDbContext())
             {

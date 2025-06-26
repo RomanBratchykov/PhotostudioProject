@@ -11,10 +11,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
+
+
 
 
 
@@ -26,13 +28,22 @@ namespace PhotostudioProject
     public partial class MainWindowControlClient : UserControl
     {
         private Clients? currentClient { get; set; }
-        private CancellationTokenSource _loadingTokenSource;
+        private CancellationTokenSource? _loadingTokenSource;
 
+        private MediaPlayer _player = new MediaPlayer();
+        private async void PlaySoundForTwoSeconds()
+        {
+            _player.Open(new Uri(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Sounds/soft-piano.mp3")));
+            _player.Play();
 
+            await Task.Delay(3000);
+            _player.Stop();
+        }
         private string email { get; set; } = string.Empty;
         public MainWindowControlClient(string email)
         {
             InitializeComponent();
+            PlaySoundForTwoSeconds();
             this.email = email;
             using (var db = new PhotoStudioDbContext())
             {
@@ -51,7 +62,6 @@ namespace PhotostudioProject
 
                 ClientSessions.ItemsSource = sessions;
             }
-            RefreshSessions();
             CheckUpNameClient.Text = "Вітаємо, " + currentClient.NameOfClient + "!";
         }
         private void ViewProfileClient_Click(object sender, RoutedEventArgs e)
@@ -103,29 +113,11 @@ namespace PhotostudioProject
             Application.Current.MainWindow = loginWin;
         }
 
-        private async void LookPortfolioButton_ClickAsync(object sender, RoutedEventArgs e)
+        private void LookPortfolioButton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                // Запускаємо анімацію очікування (без Task.Run — UI-потік)
-                StartLoadingAnimation();
-
-                // Симулюємо довге завантаження, асинхронно, без блокування UI
-                await Task.Delay(1500);
-
-                var portfoliosLook = new PortfoliosLook(email);
-
-                ((MainWindow)Application.Current.MainWindow).MainWindowContent.Content = portfoliosLook;
-                ((MainWindow)Application.Current.MainWindow).MainWindowContent.Visibility = Visibility.Visible;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Помилка при завантаженні портфоліо: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally
-            {
-                StopLoadingAnimation();
-            }
+            var portfoliosLook = new PortfoliosLook(email);
+            ((MainWindow)Application.Current.MainWindow).MainWindowContent.Content = portfoliosLook;
+            ((MainWindow)Application.Current.MainWindow).MainWindowContent.Visibility = Visibility.Visible;
         }
 
         private void CreateOrderButton_Click(object sender, RoutedEventArgs e)
@@ -146,7 +138,7 @@ namespace PhotostudioProject
             using (var db = new PhotoStudioDbContext())
             {
                 var sessions = db.PhotoSessions
-                    .Where(p => p.IdClient == currentClient.IdClient && p.StatusOfSession != "Відмінена" && p.StatusOfSession != "Готова")
+                    .Where(p => p.IdClient == currentClient.IdClient && p.StatusOfSession != "Відмінена")
                     .ToList();
 
                 ClientSessions.ItemsSource = sessions;
@@ -154,6 +146,10 @@ namespace PhotostudioProject
         }
 
 
+        private void LookPhotosMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
         private T FindAncestor<T>(DependencyObject current) where T : DependencyObject
         {
             while (current != null)
@@ -194,30 +190,6 @@ namespace PhotostudioProject
                     MessageBox.Show("Скасування відмінено.");
                 }
             }
-        }
-        private async void StartLoadingAnimation()
-        {
-            LoadingTextBlock.Visibility = Visibility.Visible;
-            _loadingTokenSource = new CancellationTokenSource();
-            var token = _loadingTokenSource.Token;
-
-            string baseText = "Очікуйте";
-            int dotCount = 0;
-
-            while (!token.IsCancellationRequested)
-            {
-                dotCount = (dotCount + 1) % 4; // 0,1,2,3 → 0,1,2,3 → 0...
-                string dots = new string('.', dotCount);
-
-                Dispatcher.Invoke(() => LoadingTextBlock.Text = baseText + dots);
-
-                await Task.Delay(500, token);
-            }
-        }
-        private void StopLoadingAnimation()
-        {
-            _loadingTokenSource?.Cancel();
-            LoadingTextBlock.Visibility = Visibility.Collapsed;
         }
     }
 }
