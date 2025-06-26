@@ -43,22 +43,9 @@
                         Background="Transparent"
                         BorderThickness="0"
                         Click="PortfolioButton_Click"
-                        Content="Редагувати портфоліо"
+                        Content="Додати фото в портфоліо"
                         Cursor="Hand"
                         DockPanel.Dock="Left">
-                        <Button.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem
-                                    x:Name="ChangeMainPhoto"
-                                    Click="ChangeMainPhoto_Click"
-                                    Header="Вибрати основну фотографію" />
-                                <MenuItem
-                                    x:Name="ChoosePhotosPortfolio"
-                                    Click="ChoosePhotosPortfolio_Click"
-                                    Header="Вибрати портфоліо" />
-
-                            </ContextMenu>
-                        </Button.ContextMenu>
                     </Button>
                     <Button
                         x:Name="CompletedTasksButton"
@@ -89,10 +76,6 @@
 
                         <Button.ContextMenu>
                             <ContextMenu>
-                                <MenuItem
-                                    x:Name="ViewProfileWorker"
-                                    Click="ViewProfileWorker_Click"
-                                    Header="Переглянути профіль" />
                                 <MenuItem
                                     x:Name="GetBackToLogin"
                                     Click="GetBackToLogin_Click"

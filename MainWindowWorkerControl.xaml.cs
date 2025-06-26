@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace PhotostudioProject
 {
@@ -69,7 +71,44 @@ namespace PhotostudioProject
 
         private void PortfolioButton_Click(object sender, RoutedEventArgs e)
         {
+            string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Photos");
+            if (!Directory.Exists(folderPath))
+                Directory.CreateDirectory(folderPath);
 
+            // Вікно вибору файлу
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Зображення (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png",
+                Multiselect = false,
+                Title = "Оберіть фото"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    string selectedFile = openFileDialog.FileName;
+                    string fileName = Path.GetFileName(selectedFile);
+                    string destinationPath = Path.Combine(folderPath, fileName);
+
+                    // Якщо такий файл вже є — додай суфікс
+                    int counter = 1;
+                    while (File.Exists(destinationPath))
+                    {
+                        string nameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
+                        string ext = Path.GetExtension(fileName);
+                        destinationPath = Path.Combine(folderPath, $"{nameWithoutExt}_{counter}{ext}");
+                        counter++;
+                    }
+
+                    File.Copy(selectedFile, destinationPath);
+                    MessageBox.Show("Фото успішно додано!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Помилка при додаванні фото: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         private void CompletedTasksButton_Click(object sender, RoutedEventArgs e)
@@ -77,16 +116,6 @@ namespace PhotostudioProject
             var completedTasks = new CompletedTasksWorker(email);
             ((MainWindow)Application.Current.MainWindow).MainWindowContent.Content = completedTasks;
             ((MainWindow)Application.Current.MainWindow).MainWindowContent.Visibility = Visibility.Visible;
-        }
-
-        private void ChangeMainPhoto_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ChoosePhotosPortfolio_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void OrdersFowWorker_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -124,7 +153,7 @@ namespace PhotostudioProject
                 if (currentPhotographer != null)
                 {
                     var photographersSession = db.PhotoSessions
-                        .Where(r => r.IdPhotographer == currentPhotographer.IdPhotographer && r.StatusOfSession != "Відмінена")
+                        .Where(r => r.IdPhotographer == currentPhotographer.IdPhotographer && r.StatusOfSession != "Відмінена" && r.StatusOfSession != "Готова")
                         .ToList();
                     OrdersFowWorker.ItemsSource = photographersSession;
                 }

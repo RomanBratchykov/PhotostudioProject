@@ -12,6 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Threading;
+
+
 
 namespace PhotostudioProject
 {
@@ -21,6 +26,8 @@ namespace PhotostudioProject
     public partial class MainWindowControlClient : UserControl
     {
         private Clients? currentClient { get; set; }
+        private CancellationTokenSource _loadingTokenSource;
+
 
         private string email { get; set; } = string.Empty;
         public MainWindowControlClient(string email)
@@ -95,11 +102,37 @@ namespace PhotostudioProject
             Application.Current.MainWindow = loginWin;
         }
 
-        private void LookPortfolioButton_Click(object sender, RoutedEventArgs e)
+        private async void LookPortfolioButton_ClickAsync(object sender, RoutedEventArgs e)
         {
-            var portfoliosLook = new PortfoliosLook(email);
-            ((MainWindow)Application.Current.MainWindow).MainWindowContent.Content = portfoliosLook;
-            ((MainWindow)Application.Current.MainWindow).MainWindowContent.Visibility = Visibility.Visible;
+            var mainWindow = (MainWindow)Application.Current.MainWindow;
+
+            // Start loading animation
+            await Task.Run(() => mainWindow.Dispatcher.Invoke(() => StartLoadingAnimation()));
+
+            try
+            {
+                // Simulate heavy loading or long initialization
+                var portfoliosLook = await Task.Run(() =>
+                {
+                    Thread.Sleep(1500);
+                    return new PortfoliosLook(email);
+                });
+
+                // Switch the view on the UI thread
+                mainWindow.Dispatcher.Invoke(() =>
+                {
+                    mainWindow.MainWindowContent.Content = portfoliosLook;
+                    mainWindow.MainWindowContent.Visibility = Visibility.Visible;
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка при завантаженні портфоліо: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                StopLoadingAnimation();
+            }
         }
 
         private void CreateOrderButton_Click(object sender, RoutedEventArgs e)
@@ -115,16 +148,6 @@ namespace PhotostudioProject
                 MessageBox.Show("Помилка при створенні нового сеансу.");
             }
         }
-
-        private void HelpButtonClient_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void GetHelpButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         public void RefreshSessions()
         {
             using (var db = new PhotoStudioDbContext())
@@ -138,10 +161,6 @@ namespace PhotostudioProject
         }
 
 
-        private void LookPhotosMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         private T FindAncestor<T>(DependencyObject current) where T : DependencyObject
         {
             while (current != null)
@@ -182,6 +201,31 @@ namespace PhotostudioProject
                     MessageBox.Show("Скасування відмінено.");
                 }
             }
+        }
+        private async void StartLoadingAnimation()
+        {
+            LoadingTextBlock.Visibility = Visibility.Visible;
+            _loadingTokenSource = new CancellationTokenSource();
+            var token = _loadingTokenSource.Token;
+
+            string baseText = "Очікуйте";
+            int dotCount = 0;
+
+            while (!token.IsCancellationRequested)
+            {
+                dotCount = (dotCount + 1) % 4; // 0,1,2,3 → 0,1,2,3 → 0...
+                string dots = new string('.', dotCount);
+
+                // UI оновлення через Dispatcher
+                Dispatcher.Invoke(() => LoadingTextBlock.Text = baseText + dots);
+
+                await Task.Delay(500, token);
+            }
+        }
+        private void StopLoadingAnimation()
+        {
+            _loadingTokenSource?.Cancel();
+            LoadingTextBlock.Visibility = Visibility.Collapsed;
         }
     }
 }

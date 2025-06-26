@@ -86,17 +86,9 @@
                         <Button.ContextMenu>
                             <ContextMenu>
                                 <MenuItem
-                                    x:Name="ViewProfileAdmin"
-                                    Click="ViewProfileAdmin_Click"
-                                    Header="Переглянути профіль" />
-                                <MenuItem
                                     x:Name="GetBackToLogin"
                                     Click="GetBackToLogin_Click"
                                     Header="Повернутись до логіну" />
-                                <MenuItem
-                                    x:Name="CreateRaport"
-                                    Click="CreateRaport_Click"
-                                    Header="Зробити звіт" />
                                 <Separator />
                                 <MenuItem
                                     x:Name="ExitButtonAdmin"

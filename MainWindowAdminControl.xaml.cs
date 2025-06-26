@@ -52,15 +52,6 @@ namespace PhotostudioProject
                 WorkersInfo.ItemsSource = photographers.Where(r => r.IdOfLocation == currentAdmin.IdOfLocation);
             }
         }
-        private void ViewProfileAdmin_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CreateRaport_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void ExitButtonAdmin_Click(object sender, RoutedEventArgs e)
         {
