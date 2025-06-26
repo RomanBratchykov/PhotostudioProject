@@ -8,6 +8,7 @@
     Title="Фотостудія Emerald"
     Width="350"
     Height="450"
+    Icon="pack://application:,,,/Assets/Logotype.ico"
     mc:Ignorable="d">
     <Grid>
         <ContentControl x:Name="ClientContentLogin" />

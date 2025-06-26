@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Додати працівника"
     Width="350"
+    Icon="pack://application:,,,/Assets/Logotype.ico"
     Height="450"
     mc:Ignorable="d">
     <Grid>

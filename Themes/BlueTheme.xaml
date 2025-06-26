@@ -41,4 +41,5 @@
         <Setter Property="RowBackground" Value="{DynamicResource MenuBrush}" />
         <Setter Property="AlternatingRowBackground" Value="#10FFFFFF" />
     </Style>
+    
 </ResourceDictionary>

@@ -8,6 +8,7 @@
     Title="Редактор замовлення"
     Width="500"
     Height="550"
+    Icon="pack://application:,,,/Assets/Logotype.ico"
     mc:Ignorable="d">
     <Grid Margin="10">
         <Border

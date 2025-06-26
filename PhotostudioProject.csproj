@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Logotype.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="ControlzEx" Version="7.0.1" />
     <PackageReference Include="MahApps.Metro" Version="2.4.10" />
     <PackageReference Include="MaterialDesignColors" Version="5.2.1" />
@@ -22,6 +26,12 @@
     <PackageReference Include="PdfSharp-MigraDoc" Version="6.2.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
     <PackageReference Include="QuestPDF" Version="2025.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Logotype.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
