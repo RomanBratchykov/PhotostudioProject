@@ -19,9 +19,15 @@ namespace PhotostudioProject
     /// </summary>
     public partial class AddWorker : Window
     {
+
         private Administrators? currentAdmin { get; set; }
         public AddWorker(string email)
         {
+            this.Resources.MergedDictionaries.Clear();
+            foreach (var dict in Application.Current.Resources.MergedDictionaries)
+            {
+                this.Resources.MergedDictionaries.Add(dict);
+            }
             InitializeComponent();
             using (var db = new PhotoStudioDbContext())
             {

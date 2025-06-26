@@ -23,6 +23,11 @@ namespace PhotostudioProject
         {
             InitializeComponent();
             ClientContentLogin.Content = new StartupWindowClient();
+            this.Resources.MergedDictionaries.Clear();
+            foreach (var dict in Application.Current.Resources.MergedDictionaries)
+            {
+                this.Resources.MergedDictionaries.Add(dict);
+            }
         }
     }
 }

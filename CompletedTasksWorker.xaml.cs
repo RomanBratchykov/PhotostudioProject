@@ -48,4 +48,5 @@ namespace PhotostudioProject
             ((MainWindow)Application.Current.MainWindow).MainWindowContent.Visibility = Visibility.Visible;
         }
     }
+    
 }

@@ -33,6 +33,11 @@ namespace PhotostudioProject
         public AddNewSession(string email)
         {
             InitializeComponent();
+            this.Resources.MergedDictionaries.Clear();
+            foreach (var dict in Application.Current.Resources.MergedDictionaries)
+            {
+                this.Resources.MergedDictionaries.Add(dict);
+            }
             this.email = email;
             using (var db = new PhotoStudioDbContext())
             {

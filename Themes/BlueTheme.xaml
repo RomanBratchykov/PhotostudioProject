@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Color x:Key="BackgroundColor">#FF87CEFA</Color>
+    <Color x:Key="TextColor">Black</Color>
+    <Color x:Key="MenuColor">#FFADD8E6</Color>
+
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" />
+    <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}" />
+    <SolidColorBrush x:Key="MenuBrush" Color="{StaticResource MenuColor}" />
+    <Style TargetType="Grid">
+        <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+    </Style>
+
+    <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+    <Style TargetType="TextBox">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+    <Style TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+    </Style>
+    <Style TargetType="DataGridTextColumn">
+        <Setter Property="Foreground" Value="Black" />
+    </Style>
+    <Style TargetType="Window">
+        <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+    </Style>
+
+    <!--  Для DataGrid  -->
+    <Style TargetType="DataGrid">
+        <Setter Property="Background" Value="{DynamicResource MenuBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="RowBackground" Value="{DynamicResource MenuBrush}" />
+        <Setter Property="AlternatingRowBackground" Value="#10FFFFFF" />
+    </Style>
+</ResourceDictionary>

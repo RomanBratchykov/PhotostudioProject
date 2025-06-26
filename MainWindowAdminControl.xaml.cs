@@ -23,20 +23,9 @@ namespace PhotostudioProject
         private Administrators? currentAdmin { get; set; }
         private string email { get; set; } = string.Empty;
 
-        private MediaPlayer _player = new MediaPlayer();
-
-        private async void PlaySoundForTwoSeconds()
-        {
-            _player.Open(new Uri(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Sounds/soft-piano.mp3")));
-            _player.Play();
-
-            await Task.Delay(3000); 
-            _player.Stop();         
-        }
         public MainWindowAdminControl(string email)
         {
             InitializeComponent();
-            PlaySoundForTwoSeconds();
             this.email = email;
             using (var db = new PhotoStudioDbContext())
             {
@@ -118,6 +107,34 @@ namespace PhotostudioProject
             var ordersWindow = new ViewAllOrdersAdmin(email);
             ((MainWindow)Application.Current.MainWindow).MainWindowContent.Content = ordersWindow;
             ((MainWindow)Application.Current.MainWindow).MainWindowContent.Visibility = Visibility.Visible;
+        }
+
+        private void ChangeThemeLight_Click(object sender, RoutedEventArgs e)
+        {
+            ApplyTheme("Themes/LightTheme.xaml");
+        }
+
+        private void ChangeThemeBlue_Click(object sender, RoutedEventArgs e)
+        {
+            ApplyTheme("Themes/BlueTheme.xaml");
+        }
+
+        private void ExitButtonAdminChangeThemeDark_Click(object sender, RoutedEventArgs e)
+        {
+            ApplyTheme("Themes/DarkTheme.xaml");
+        }
+        public void ApplyTheme(string themePath)
+        {
+
+            var uri = new Uri(themePath, UriKind.Relative);
+            ResourceDictionary theme = new ResourceDictionary { Source = uri };
+
+            Application.Current.Resources.MergedDictionaries.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(theme);
+
+            // Зберегти в налаштування
+            Properties.Settings.Default.CurrentTheme = themePath;
+            Properties.Settings.Default.Save();
         }
     }
 }

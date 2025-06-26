@@ -26,7 +26,12 @@ namespace PhotostudioProject
         public MainWindow(string currentUser, string email)
             {
             InitializeComponent();
-            currentEmail = email; 
+            currentEmail = email;
+            this.Resources.MergedDictionaries.Clear();
+            foreach (var dict in Application.Current.Resources.MergedDictionaries)
+            {
+                this.Resources.MergedDictionaries.Add(dict);
+            }
             if (currentUser == "client")
             {
                 

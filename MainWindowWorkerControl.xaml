@@ -146,6 +146,15 @@
                 x:Name="CheckUpName"
                 VerticalAlignment="Bottom"
                 Text="" />
+            <TextBlock
+                x:Name="LoadingTextBlock"
+                Margin="10"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                FontSize="16"
+                Foreground="DarkSlateGray"
+                Text="Очікуйте"
+                Visibility="Collapsed" />
         </Grid>
     </DockPanel>
 </UserControl>

@@ -28,6 +28,11 @@ namespace PhotostudioProject
         {
             InitializeComponent();
             _state = state;
+            this.Resources.MergedDictionaries.Clear();
+            foreach (var dict in Application.Current.Resources.MergedDictionaries)
+            {
+                this.Resources.MergedDictionaries.Add(dict);
+            }
         }
 
         private void GetBackToCode_MouseDown(object sender, MouseButtonEventArgs e)

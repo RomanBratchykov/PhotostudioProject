@@ -12,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.IO;
 
 namespace PhotostudioProject
 {
@@ -21,9 +21,24 @@ namespace PhotostudioProject
     /// </summary>
     public partial class StartupWindowClient : UserControl
     {
+        private MediaPlayer _player = new MediaPlayer();
+        private async void PlaySoundForTwoSeconds()
+        {
+            _player.Open(new Uri(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Sounds/soft-piano.mp3")));
+            _player.Play();
+
+            await Task.Delay(3000);
+            _player.Stop();
+        }
         public StartupWindowClient()
         {
             InitializeComponent();
+            PlaySoundForTwoSeconds();
+            this.Resources.MergedDictionaries.Clear();
+            foreach (var dict in Application.Current.Resources.MergedDictionaries)
+            {
+                this.Resources.MergedDictionaries.Add(dict);
+            }
         }
         private void RegistrationTextStartup_MouseDown(object sender, MouseButtonEventArgs e)
         {

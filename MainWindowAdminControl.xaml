@@ -9,133 +9,144 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <DockPanel>
-        <!-- Верхнє меню -->
-        <Menu DockPanel.Dock="Top" Background="#FFF0F0F0">
+        <!--  Верхнє меню  -->
+        <Menu Background="#FFF0F0F0" DockPanel.Dock="Top">
             <MenuItem Header="Меню">
                 <MenuItem
-                x:Name="GetBackToLogin"
-                Click="GetBackToLogin_Click"
-                Header="Повернутись до логіну" />
+                    x:Name="GetBackToLogin"
+                    Click="GetBackToLogin_Click"
+                    Header="Повернутись до логіну" />
                 <Separator />
                 <MenuItem
-                x:Name="ExitButtonAdmin"
-                Click="ExitButtonAdmin_Click"
-                Header="Вийти" />
+                    x:Name="ExitButtonAdmin"
+                    Click="ExitButtonAdmin_Click"
+                    Header="Вийти" />
+                <Separator />
+                <MenuItem
+                    x:Name="ChangeThemeLight"
+                    Click="ChangeThemeLight_Click"
+                    Header="Світла тема" />
+                <MenuItem
+                    x:Name="ChangeThemeBlue"
+                    Click="ChangeThemeBlue_Click"
+                    Header="Синя тема" />
+                <MenuItem
+                    x:Name="ExitButtonAdminChangeThemeDark"
+                    Click="ExitButtonAdminChangeThemeDark_Click"
+                    Header="Темна тема" />
             </MenuItem>
         </Menu>
 
         <Grid Margin="10">
-        <Menu>
-            
-        </Menu>
-        <Border
-            Padding="10"
-            Background="#B2FF99"
-            CornerRadius="5">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-
-                    <RowDefinition />
-
-                    <RowDefinition Height="40" />
-
-                </Grid.RowDefinitions>
-
-
-                <DockPanel
-                    Grid.Row="0"
-                    Margin="0,0,0,10"
-                    LastChildFill="False">
-                    <TextBlock
-                        Margin="10,0"
-                        VerticalAlignment="Center"
-                        FontFamily="Comic Sans MS"
-                        FontSize="20"
-                        FontStyle="Italic"
-                        Text="Emerald Studio" />
-
-                    <Button
-                        x:Name="WorkerAddButton"
-                        Margin="20,0"
-                        Padding="10,5"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Click="WorkerAddButton_Click"
-                        Content="Додати працівника"
-                        Cursor="Hand"
-                        DockPanel.Dock="Left" />
-                    <Button
-                        x:Name="WorkerDeleteButton"
-                        Margin="10,0"
-                        Padding="10,5"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Click="WorkerDeleteButton_Click"
-                        Content="Видалити працівника"
-                        Cursor="Hand"
-                        DockPanel.Dock="Left" />
-                    <Button
-                        x:Name="ViewOrdersButton"
-                        Click="ViewOrdersButton_Click"
-                        Margin="10,0"
-                        Padding="10,5"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Content="Переглянути всі закази"
-                        Cursor="Hand"
-                        DockPanel.Dock="Left" />
-                </DockPanel>
-
-                <Grid Grid.Row="1">
+            <Menu />
+            <Border
+                Padding="10"
+                Background="#B2FF99"
+                CornerRadius="5">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
+
                         <RowDefinition />
+
+                        <RowDefinition Height="40" />
+
                     </Grid.RowDefinitions>
 
-                    <TextBlock
-                        Margin="10,0"
-                        FontSize="16"
-                        FontWeight="Bold"
-                        Text="Ваші працівники" />
 
-                    <DataGrid
-                        x:Name="WorkersInfo"
-                        Grid.Row="1"
-                        Margin="10"
-                        AutoGenerateColumns="False"
-                        Background="#CCFFCC"
-                        FontSize="14"
-                        GridLinesVisibility="Horizontal"
-                        HeadersVisibility="Column">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn
-                                IsReadOnly="True"
-                                Width="*"
-                                Binding="{Binding NameOfPhotographer}"
-                                Header="ПІБ" />
-                            <DataGridTextColumn
-                                IsReadOnly="True"
-                                Width="*"
-                                Binding="{Binding PhoneNumberPhotographer}"
-                                Header="Номер телефону" />
-                            <DataGridTextColumn
-                                IsReadOnly="True"
-                                Width="*"
-                                Binding="{Binding EmailOfPhotographer}"
-                                Header="Email" />
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <DockPanel
+                        Grid.Row="0"
+                        Margin="0,0,0,10"
+                        LastChildFill="False">
+                        <TextBlock
+                            Margin="10,0"
+                            VerticalAlignment="Center"
+                            FontFamily="Comic Sans MS"
+                            FontSize="20"
+                            FontStyle="Italic"
+                            Text="Emerald Studio" />
+
+                        <Button
+                            x:Name="WorkerAddButton"
+                            Margin="20,0"
+                            Padding="10,5"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="WorkerAddButton_Click"
+                            Content="Додати працівника"
+                            Cursor="Hand"
+                            DockPanel.Dock="Left" />
+                        <Button
+                            x:Name="WorkerDeleteButton"
+                            Margin="10,0"
+                            Padding="10,5"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="WorkerDeleteButton_Click"
+                            Content="Видалити працівника"
+                            Cursor="Hand"
+                            DockPanel.Dock="Left" />
+                        <Button
+                            x:Name="ViewOrdersButton"
+                            Margin="10,0"
+                            Padding="10,5"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="ViewOrdersButton_Click"
+                            Content="Переглянути всі закази"
+                            Cursor="Hand"
+                            DockPanel.Dock="Left" />
+                    </DockPanel>
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock
+                            Margin="10,0"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Text="Ваші працівники" />
+
+                        <DataGrid
+                            x:Name="WorkersInfo"
+                            Grid.Row="1"
+                            Margin="10"
+                            AutoGenerateColumns="False"
+                            Background="#CCFFCC"
+                            FontSize="14"
+                            GridLinesVisibility="Horizontal"
+                            HeadersVisibility="Column">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding NameOfPhotographer}"
+                                    Header="ПІБ"
+                                    IsReadOnly="True" />
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding PhoneNumberPhotographer}"
+                                    Header="Номер телефону"
+                                    IsReadOnly="True" />
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding EmailOfPhotographer}"
+                                    Header="Email"
+                                    IsReadOnly="True" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+
+
+
                 </Grid>
-
-
-
-            </Grid>
-        </Border>
-        <TextBlock
-    x:Name="CheckUpNameAdmin"
-    VerticalAlignment="Bottom"
-    Text="" />
-    </Grid>
+            </Border>
+            <TextBlock
+                x:Name="CheckUpNameAdmin"
+                VerticalAlignment="Bottom"
+                Text="" />
+        </Grid>
     </DockPanel>
 </UserControl>

@@ -27,6 +27,11 @@ namespace PhotostudioProject
         {
             this.email = email;
             InitializeComponent();
+            this.Resources.MergedDictionaries.Clear();
+            foreach (var dict in Application.Current.Resources.MergedDictionaries)
+            {
+                this.Resources.MergedDictionaries.Add(dict);
+            }
             RefreshSessions();
             using (var db = new PhotoStudioDbContext())
             {

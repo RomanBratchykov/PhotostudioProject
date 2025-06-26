@@ -23,6 +23,11 @@ namespace PhotostudioProject
         public StartupWindowWorker()
         {
             InitializeComponent();
+            this.Resources.MergedDictionaries.Clear();
+            foreach (var dict in Application.Current.Resources.MergedDictionaries)
+            {
+                this.Resources.MergedDictionaries.Add(dict);
+            }
         }
 
         private void EnterAsClient_MouseDown(object sender, MouseButtonEventArgs e)

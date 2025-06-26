@@ -23,15 +23,7 @@ namespace PhotostudioProject
     /// </summary>
     public partial class MainWindowWorkerControl : UserControl
     {
-        private MediaPlayer _player = new MediaPlayer();
-        private async void PlaySoundForTwoSeconds()
-        {
-            _player.Open(new Uri(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Sounds/soft-piano.mp3")));
-            _player.Play();
 
-            await Task.Delay(3000);
-            _player.Stop();
-        }
 
         private string email { get; set; } = string.Empty;
         private Photographer? currentPhotographer { get; set; }
@@ -40,7 +32,6 @@ namespace PhotostudioProject
             
             this.email = email;
             InitializeComponent();
-            PlaySoundForTwoSeconds();
             using (var db = new PhotoStudioDbContext())
             {
 

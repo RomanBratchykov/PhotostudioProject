@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.IO;
 using System.Net;
 using System.Net.Mail;
 
@@ -27,6 +27,11 @@ namespace PhotostudioProject
         {
             InitializeComponent();
             var registrationClient = new Clients();
+            this.Resources.MergedDictionaries.Clear();
+            foreach (var dict in Application.Current.Resources.MergedDictionaries)
+            {
+                this.Resources.MergedDictionaries.Add(dict);
+            }
         }
 
         private void ReturnToMainPage_MouseDown(object sender, MouseButtonEventArgs e)
