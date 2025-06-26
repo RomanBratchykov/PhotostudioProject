@@ -207,7 +207,14 @@
                     </Button>
                 </Border>
 
-
+                <TextBlock
+    x:Name="LoadingTextBlock"
+    Margin="10"
+    HorizontalAlignment="Right"
+    VerticalAlignment="Bottom"
+    FontSize="16"
+    Text="Очікуйте" 
+    />
             </StackPanel>
         </Border>
     </Grid>

@@ -51,6 +51,7 @@ namespace PhotostudioProject
 
                 ClientSessions.ItemsSource = sessions;
             }
+            RefreshSessions();
             CheckUpNameClient.Text = "Вітаємо, " + currentClient.NameOfClient + "!";
         }
         private void ViewProfileClient_Click(object sender, RoutedEventArgs e)
@@ -104,26 +105,18 @@ namespace PhotostudioProject
 
         private async void LookPortfolioButton_ClickAsync(object sender, RoutedEventArgs e)
         {
-            var mainWindow = (MainWindow)Application.Current.MainWindow;
-
-            // Start loading animation
-            await Task.Run(() => mainWindow.Dispatcher.Invoke(() => StartLoadingAnimation()));
-
             try
             {
-                // Simulate heavy loading or long initialization
-                var portfoliosLook = await Task.Run(() =>
-                {
-                    Thread.Sleep(1500);
-                    return new PortfoliosLook(email);
-                });
+                // Запускаємо анімацію очікування (без Task.Run — UI-потік)
+                StartLoadingAnimation();
 
-                // Switch the view on the UI thread
-                mainWindow.Dispatcher.Invoke(() =>
-                {
-                    mainWindow.MainWindowContent.Content = portfoliosLook;
-                    mainWindow.MainWindowContent.Visibility = Visibility.Visible;
-                });
+                // Симулюємо довге завантаження, асинхронно, без блокування UI
+                await Task.Delay(1500);
+
+                var portfoliosLook = new PortfoliosLook(email);
+
+                ((MainWindow)Application.Current.MainWindow).MainWindowContent.Content = portfoliosLook;
+                ((MainWindow)Application.Current.MainWindow).MainWindowContent.Visibility = Visibility.Visible;
             }
             catch (Exception ex)
             {
@@ -153,7 +146,7 @@ namespace PhotostudioProject
             using (var db = new PhotoStudioDbContext())
             {
                 var sessions = db.PhotoSessions
-                    .Where(p => p.IdClient == currentClient.IdClient && p.StatusOfSession != "Відмінена")
+                    .Where(p => p.IdClient == currentClient.IdClient && p.StatusOfSession != "Відмінена" && p.StatusOfSession != "Готова")
                     .ToList();
 
                 ClientSessions.ItemsSource = sessions;
@@ -216,7 +209,6 @@ namespace PhotostudioProject
                 dotCount = (dotCount + 1) % 4; // 0,1,2,3 → 0,1,2,3 → 0...
                 string dots = new string('.', dotCount);
 
-                // UI оновлення через Dispatcher
                 Dispatcher.Invoke(() => LoadingTextBlock.Text = baseText + dots);
 
                 await Task.Delay(500, token);

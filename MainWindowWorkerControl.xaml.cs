@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -51,10 +53,6 @@ namespace PhotostudioProject
 
         }
 
-        private void ViewProfileWorker_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void GetBackToLogin_Click(object sender, RoutedEventArgs e)
         {
@@ -78,9 +76,8 @@ namespace PhotostudioProject
             // Вікно вибору файлу
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                Filter = "Зображення (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png",
                 Multiselect = false,
-                Title = "Оберіть фото"
+                Title = "Оберіть файл"
             };
 
             if (openFileDialog.ShowDialog() == true)
@@ -91,7 +88,6 @@ namespace PhotostudioProject
                     string fileName = Path.GetFileName(selectedFile);
                     string destinationPath = Path.Combine(folderPath, fileName);
 
-                    // Якщо такий файл вже є — додай суфікс
                     int counter = 1;
                     while (File.Exists(destinationPath))
                     {
@@ -111,6 +107,40 @@ namespace PhotostudioProject
             }
         }
 
+        private void SendEmailWithAttachments(string toEmail, List<string> filePaths)
+        {
+            const string fromEmail = "photostudioemerald@gmail.com";
+            const string fromPassword = "mqoz ecow tqfj dcmr";
+            const string smtpHost = "smtp.gmail.com";
+            const int smtpPort = 587;
+
+            var fromAddress = new MailAddress(fromEmail, "Emerald Studio");
+            var toAddress = new MailAddress(toEmail);
+
+            using var smtp = new SmtpClient
+            {
+                Host = smtpHost,
+                Port = smtpPort,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                Credentials = new NetworkCredential(fromEmail, fromPassword),
+                Timeout = 20000
+            };
+
+            using var message = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = "Ваші фото з фотостудії",
+                Body = "Дякуємо! У вкладенні — ваші фото."
+            };
+
+            foreach (var path in filePaths)
+            {
+                var attachment = new Attachment(path);
+                message.Attachments.Add(attachment);
+            }
+
+            smtp.Send(message);
+        }
         private void CompletedTasksButton_Click(object sender, RoutedEventArgs e)
         {
             var completedTasks = new CompletedTasksWorker(email);
@@ -122,27 +152,63 @@ namespace PhotostudioProject
         {
             if (OrdersFowWorker.SelectedItem is PhotoSessions selectedSession)
             {
-                var result = MessageBox.Show(
-                "Cкинути фото?",
-                "Підтвердження скасування",
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Question
-                 );
+                var idClient = selectedSession.IdClient;
+                var clientEmail = string.Empty;
+                using (var db = new PhotoStudioDbContext())
+                {
+                    var client = db.Clients.FirstOrDefault(c => c.IdClient == idClient);
+                    if (client != null)
+                    {
+                        clientEmail = client.EmailOfClient;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Клієнт не знайдений.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                }
+                    var result = MessageBox.Show(
+                        "Cкинути фото?",
+                        "Підтвердження скасування",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Question);
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    selectedSession.StatusOfSession = "Готова";
-                    MessageBox.Show("Фото відправлені.");
-                    using (var db = new PhotoStudioDbContext())
+                    OpenFileDialog openFileDialog = new OpenFileDialog
                     {
-                        db.PhotoSessions.Update(selectedSession);
-                        db.SaveChanges();
+                        Multiselect = true,
+                        Title = "Оберіть файли"
+                    };
+
+                    if (openFileDialog.ShowDialog() == true)
+                    {
+                        try
+                        {
+                            var selectedFiles = openFileDialog.FileNames.ToList();
+                            SendEmailWithAttachments(clientEmail, selectedFiles);
+
+                            MessageBox.Show("Фото відправлено!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                            selectedSession.StatusOfSession = "Готова";
+
+                            using (var db = new PhotoStudioDbContext())
+                            {
+                                db.PhotoSessions.Update(selectedSession);
+                                db.SaveChanges();
+                            }
+
+                            RefreshSessions();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Помилка при відправленні: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
-                    RefreshSessions();
                 }
                 else
                 {
-                    MessageBox.Show("Скасування відмінено.");
+                    MessageBox.Show("Відправку відмінено.");
                 }
             }
         }
