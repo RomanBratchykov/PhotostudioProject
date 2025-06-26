@@ -64,6 +64,23 @@
                         FontSize="16"
                         FontWeight="Bold"
                         Text="Ваші замовлення" />
+                    <TextBlock
+                        Grid.ColumnSpan="2"
+                        Margin="474,0,10,0"
+                        FontSize="14"
+                        Text="вибрати фотографа" />
+                    <ComboBox
+                        x:Name="ChoosePhotographerComboBox"
+                        Grid.ColumnSpan="2"
+                        Width="138"
+                        Height="30"
+                        Margin="607,0,0,0"
+                        HorizontalAlignment="Left"
+                        DisplayMemberPath="NameOfPhotographer"
+                        RenderTransformOrigin="0.504,0.59"
+                        SelectedIndex="0"
+                        SelectedValuePath="IdPhotographer"
+                        SelectionChanged="ChoosePhotographerComboBox_SelectionChanged" />
                     <DataGrid
                         x:Name="SessionsForAdmin"
                         Grid.Row="1"

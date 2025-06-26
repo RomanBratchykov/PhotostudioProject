@@ -8,163 +8,151 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Grid Margin="10">
-        <Border
-            Padding="10"
-            Background="#B2FF99"
-            CornerRadius="5">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
 
-                    <RowDefinition />
+    <DockPanel>
+        <!--  Верхнє меню  -->
+        <Menu Background="#FFF0F0F0" DockPanel.Dock="Top">
+            <MenuItem Header="Меню">
+                <MenuItem
+                    x:Name="DeleteProfileClient"
+                    Click="DeleteProfileClient_Click"
+                    Header="Видалити аккаунт" />
+                <MenuItem
+                    x:Name="GetBackTologin"
+                    Click="GetBackTologin_Click"
+                    Header="Повернутись до реєстрації" />
+                <Separator />
+                <MenuItem
+                    x:Name="ExitButtonClient"
+                    Click="ExitButtonClient_Click"
+                    Header="Вийти" />
+            </MenuItem>
+        </Menu>
 
-                    <RowDefinition Height="40" />
-
-                </Grid.RowDefinitions>
-
-
-                <DockPanel
-                    Grid.Row="0"
-                    Margin="0,0,0,10"
-                    LastChildFill="False">
-                    <TextBlock
-                        Margin="10,0"
-                        VerticalAlignment="Center"
-                        FontFamily="Comic Sans MS"
-                        FontSize="20"
-                        FontStyle="Italic"
-                        Text="Emerald Studio" />
-
-                    <Button
-                        x:Name="CreateOrderButton"
-                        Margin="20,0"
-                        Padding="10,5"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Click="CreateOrderButton_Click"
-                        Content="Створити замовлення"
-                        Cursor="Hand"
-                        DockPanel.Dock="Left" />
-                    <Button
-                        x:Name="LookPortfolioButton"
-                        Margin="10,0"
-                        Padding="10,5"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Click="LookPortfolioButton_ClickAsync"
-                        Content="Перегляд фотографів"
-                        Cursor="Hand"
-                        DockPanel.Dock="Left" />
-
-                    <Button
-                        Width="30"
-                        Height="30"
-                        Margin="10,0"
-                        HorizontalAlignment="Right"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Cursor="Hand"
-                        DockPanel.Dock="Right"
-                        ToolTip="Профіль">
-                        <Image
-                            Width="30"
-                            Height="30"
-                            Source="Assets/profile_icon (2).png"
-                            Stretch="Uniform" />
-
-                        <Button.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem
-                                    x:Name="DeleteProfileClient"
-                                    Click="DeleteProfileClient_Click"
-                                    Header="Видалити аккаунт" />
-                                <MenuItem
-                                    x:Name="GetBackTologin"
-                                    Click="GetBackTologin_Click"
-                                    Header="Повернутись до реєстрації" />
-                                <Separator />
-                                <MenuItem
-                                    x:Name="ExitButtonClient"
-                                    Click="ExitButtonClient_Click"
-                                    Header="Вийти" />
-                            </ContextMenu>
-                        </Button.ContextMenu>
-                    </Button>
-                </DockPanel>
-
-                <Grid Grid.Row="1">
+        <Grid Margin="10">
+            <Border
+                Padding="10"
+                Background="#B2FF99"
+                CornerRadius="5">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
+
                         <RowDefinition />
+
+                        <RowDefinition Height="40" />
+
                     </Grid.RowDefinitions>
 
-                    <TextBlock
-                        Margin="10,0"
-                        FontSize="16"
-                        FontWeight="Bold"
-                        Text="Ваші замовлення" />
-                    <DataGrid
-                        x:Name="ClientSessions"
-                        Grid.Row="1"
-                        Margin="10"
-                        AutoGenerateColumns="False"
-                        Background="#CCFFCC"
-                        FontSize="14"
-                        GridLinesVisibility="Horizontal"
-                        HeadersVisibility="Column"
-                        MouseDoubleClick="ClientSessions_MouseDoubleClick_1">
+
+                    <DockPanel
+                        Grid.Row="0"
+                        Margin="0,0,0,10"
+                        LastChildFill="False">
+                        <TextBlock
+                            Margin="10,0"
+                            VerticalAlignment="Center"
+                            FontFamily="Comic Sans MS"
+                            FontSize="20"
+                            FontStyle="Italic"
+                            Text="Emerald Studio" />
+
+                        <Button
+                            x:Name="CreateOrderButton"
+                            Margin="20,0"
+                            Padding="10,5"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="CreateOrderButton_Click"
+                            Content="Створити замовлення"
+                            Cursor="Hand"
+                            DockPanel.Dock="Left" />
+                        <Button
+                            x:Name="LookPortfolioButton"
+                            Margin="10,0"
+                            Padding="10,5"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="LookPortfolioButton_ClickAsync"
+                            Content="Перегляд фотографів"
+                            Cursor="Hand"
+                            DockPanel.Dock="Left" />
+
+                    </DockPanel>
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock
+                            Margin="10,0"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Text="Ваші замовлення" />
+                        <DataGrid
+                            x:Name="ClientSessions"
+                            Grid.Row="1"
+                            Margin="10"
+                            AutoGenerateColumns="False"
+                            Background="#CCFFCC"
+                            FontSize="14"
+                            GridLinesVisibility="Horizontal"
+                            HeadersVisibility="Column"
+                            MouseDoubleClick="ClientSessions_MouseDoubleClick_1">
 
 
-                        <DataGrid.Columns>
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding NameOfPhotographer}"
-                                Header="Фотограф"
-                                IsReadOnly="True" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding Location}"
-                                Header="Локація"
-                                IsReadOnly="True" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding DateOfSession}"
-                                Header="Дата"
-                                IsReadOnly="True" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding Price}"
-                                Header="Ціна"
-                                IsReadOnly="True" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding NameOfType}"
-                                Header="Тип послуги"
-                                IsReadOnly="True" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding StatusOfSession}"
-                                Header="Готовність"
-                                IsReadOnly="True" />
-                        </DataGrid.Columns>
-                    </DataGrid>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding NameOfPhotographer}"
+                                    Header="Фотограф"
+                                    IsReadOnly="True" />
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding Location}"
+                                    Header="Локація"
+                                    IsReadOnly="True" />
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding DateOfSession}"
+                                    Header="Дата"
+                                    IsReadOnly="True" />
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding Price}"
+                                    Header="Ціна"
+                                    IsReadOnly="True" />
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding NameOfType}"
+                                    Header="Тип послуги"
+                                    IsReadOnly="True" />
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding StatusOfSession}"
+                                    Header="Готовність"
+                                    IsReadOnly="True" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+
+
                 </Grid>
-
-
-            </Grid>
-        </Border>
-        <TextBlock
-            x:Name="CheckUpNameClient"
-            VerticalAlignment="Bottom"
-            Text="" />
-        <TextBlock
-            x:Name="LoadingTextBlock"
-            Margin="10"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-            FontSize="16"
-            Text="Очікуйте" 
-            Visibility="Collapsed"/>
-    </Grid>
+            </Border>
+            <TextBlock
+                x:Name="CheckUpNameClient"
+                VerticalAlignment="Bottom"
+                Text="" />
+            <TextBlock
+                x:Name="LoadingTextBlock"
+                Margin="10"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                FontSize="16"
+                Text="Очікуйте"
+                Visibility="Collapsed" />
+        </Grid>
+    </DockPanel>
 </UserControl>

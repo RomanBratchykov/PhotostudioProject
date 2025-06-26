@@ -27,18 +27,19 @@ namespace PhotostudioProject
         {
             this.email = email;
             InitializeComponent();
+            RefreshSessions();
             using (var db = new PhotoStudioDbContext())
             {
-
                 var admin = db.Administrators.FirstOrDefault(a => a.EmailOfAdmin == email);
-                var photographerIds = db.Photographers
-                .Where(p => p.IdOfAdmin == admin.IdAdmin)
-                .Select(p => p.IdPhotographer)
-                .ToList();
-                var sessions = db.PhotoSessions
-                .Where(s => photographerIds.Contains(s.IdPhotographer))
-                .ToList();
-                SessionsForAdmin.ItemsSource = sessions;
+                if (admin == null)
+                {
+                    MessageBox.Show("Адміністратор не знайдений.");
+                    return;
+                }
+                var photographers = db.Photographers
+                    .Where(p => p.IdOfAdmin == admin.IdAdmin)
+                    .ToList();
+                ChoosePhotographerComboBox.ItemsSource = photographers;
             }
         }
 
@@ -47,6 +48,51 @@ namespace PhotostudioProject
             var photographerControl = new MainWindowAdminControl(email);
             ((MainWindow)Application.Current.MainWindow).MainWindowContent.Content = photographerControl;
             ((MainWindow)Application.Current.MainWindow).MainWindowContent.Visibility = Visibility.Visible;
+        }
+
+        private void ChoosePhotographerComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ChoosePhotographerComboBox.SelectedItem is Photographer selected)
+            {
+                int id = selected.IdPhotographer;
+                RefreshSessions(id);
+            }
+        }
+        private void RefreshSessions(int idPhotographer)
+        {
+            using (var db = new PhotoStudioDbContext())
+            {
+                var admin = db.Administrators.FirstOrDefault(a => a.EmailOfAdmin == email);
+                if (admin == null)
+                {
+                    MessageBox.Show("Адміністратор не знайдений.");
+                    return;
+                }
+                var sessions = db.PhotoSessions
+                    .Where(s => s.IdPhotographer == idPhotographer)
+                    .ToList();
+                SessionsForAdmin.ItemsSource = sessions;
+            }
+        }
+        private void RefreshSessions()
+        {
+            using (var db = new PhotoStudioDbContext())
+            {
+                var admin = db.Administrators.FirstOrDefault(a => a.EmailOfAdmin == email);
+                if (admin == null)
+                {
+                    MessageBox.Show("Адміністратор не знайдений.");
+                    return;
+                }
+                var photographerIds = db.Photographers
+                    .Where(p => p.IdOfAdmin == admin.IdAdmin)
+                    .Select(p => p.IdPhotographer)
+                    .ToList();
+                var sessions = db.PhotoSessions
+                    .Where(s => photographerIds.Contains(s.IdPhotographer))
+                    .ToList();
+                SessionsForAdmin.ItemsSource = sessions;
+            }
         }
     }
 }
