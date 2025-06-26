@@ -12,7 +12,6 @@
     <Grid Margin="10">
         <Border
             Padding="20"
-            Background="#B2FF99"
             CornerRadius="10">
             <StackPanel Height="464" VerticalAlignment="Center">
 

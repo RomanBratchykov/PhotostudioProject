@@ -24,9 +24,27 @@ namespace PhotostudioProject
         public AddWorker(string email)
         {
             this.Resources.MergedDictionaries.Clear();
-            foreach (var dict in Application.Current.Resources.MergedDictionaries)
+            Application.Current.Resources.MergedDictionaries.Clear();
+
+            // Завантажуємо тему з Settings
+            var themePath = Properties.Settings.Default.CurrentTheme;
+
+            try
             {
-                this.Resources.MergedDictionaries.Add(dict);
+                var themeDict = new ResourceDictionary
+                {
+                    Source = new Uri(themePath, UriKind.RelativeOrAbsolute)
+                };
+
+                // Додаємо в Application глобально
+                Application.Current.Resources.MergedDictionaries.Add(themeDict);
+
+                // Додаємо в локальні ресурси вікна (якщо потрібно)
+                this.Resources.MergedDictionaries.Add(themeDict);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Не вдалося завантажити тему: {ex.Message}");
             }
             InitializeComponent();
             using (var db = new PhotoStudioDbContext())

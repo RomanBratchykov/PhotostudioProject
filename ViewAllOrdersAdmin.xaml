@@ -87,7 +87,6 @@
                         Grid.ColumnSpan="2"
                         Margin="10,10,10,10"
                         AutoGenerateColumns="False"
-                        Background="#CCFFCC"
                         FontSize="14"
                         GridLinesVisibility="Horizontal"
                         HeadersVisibility="Column">

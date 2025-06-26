@@ -24,7 +24,14 @@
     <Style TargetType="DataGridTextColumn">
         <Setter Property="Foreground" Value="Black" />
     </Style>
-    <!--  Для DataGrid  -->
+    <Style TargetType="Menu">
+        <Setter Property="Background" Value="#FFF0F0F0" />
+        <Setter Property="Foreground" Value="Black" />
+    </Style>
+    <Style TargetType="ComboBox">
+        <Setter Property="Background" Value="Gray" />
+        <Setter Property="Foreground" Value="Black" />
+    </Style>
     <Style TargetType="DataGrid">
         <Setter Property="Background" Value="{DynamicResource MenuBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />

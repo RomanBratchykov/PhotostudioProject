@@ -125,16 +125,30 @@ namespace PhotostudioProject
         }
         public void ApplyTheme(string themePath)
         {
+            try
+            {
+                var theme = new ResourceDictionary
+                {
+                    Source = new Uri(themePath, UriKind.RelativeOrAbsolute)
+                };
 
-            var uri = new Uri(themePath, UriKind.Relative);
-            ResourceDictionary theme = new ResourceDictionary { Source = uri };
+                // Очистити поточні словники
+                Application.Current.Resources.MergedDictionaries.Clear();
 
-            Application.Current.Resources.MergedDictionaries.Clear();
-            Application.Current.Resources.MergedDictionaries.Add(theme);
+                // Додати нову тему
+                Application.Current.Resources.MergedDictionaries.Add(theme);
 
-            // Зберегти в налаштування
-            Properties.Settings.Default.CurrentTheme = themePath;
-            Properties.Settings.Default.Save();
+                // Зберегти обраний шлях до теми
+                Properties.Settings.Default.CurrentTheme = themePath;
+                Properties.Settings.Default.Save();
+
+                // Повідомлення
+                MessageBox.Show("Тему встановлено успішно.", "Тема", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Не вдалося застосувати тему: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

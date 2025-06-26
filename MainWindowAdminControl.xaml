@@ -41,7 +41,6 @@
             <Menu />
             <Border
                 Padding="10"
-                Background="#B2FF99"
                 CornerRadius="5">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -115,7 +114,6 @@
                             Grid.Row="1"
                             Margin="10"
                             AutoGenerateColumns="False"
-                            Background="#CCFFCC"
                             FontSize="14"
                             GridLinesVisibility="Horizontal"
                             HeadersVisibility="Column">

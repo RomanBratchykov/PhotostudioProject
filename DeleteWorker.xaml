@@ -9,7 +9,7 @@
     Width="350"
     Height="250"
     mc:Ignorable="d">
-    <Grid Background="#B2FF99">
+    <Grid>
         <StackPanel
             x:Name="LoginStackPanel"
             Width="250"
